@@ -1,6 +1,6 @@
 ﻿using System;
-using Bootstrap;
 using Services;
+using Services.GameServiceLocator;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -21,9 +21,8 @@ namespace Player
 
         private void Awake()
         {
-            inputService = Game.InputService;
+            inputService = ServiceLocator.Container.LocateService<IInputService>();
         }
-
 
         private void Update()
         {

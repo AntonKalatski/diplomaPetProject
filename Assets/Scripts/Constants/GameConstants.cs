@@ -1,8 +1,17 @@
 ﻿namespace Constants
 {
     //todo move to config
-    public class GameConstants
+    public static class GameConstants
     {
-        public const float Epsilon = 0.005f;
+        #region SceneNames
+
+        public const string Loading = "Loading";
+        public const string Main = "Main";
+        
+        #endregion
+        
+        public const float Epsilon = 0.01f;
+        
+        
     }
 }

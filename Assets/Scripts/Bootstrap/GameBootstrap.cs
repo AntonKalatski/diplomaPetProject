@@ -1,17 +1,19 @@
-﻿using GameState;
+﻿using Configs.Container;
+using GameSM.States;
+using UI.Loading;
 using UnityEngine;
 
 namespace Bootstrap
 {
-    public class GameBootstrap : MonoBehaviour
+    public class GameBootstrap : MonoBehaviour, ICoroutineRunner
     {
-        private Game _game;
-
+        [SerializeField] private LoadingCurtain loadingCurtain;
+        [SerializeField] private GameConfigsContainer configsContainer;
+        private Game game;
         private void Awake()
         {
-            _game = new Game();
-            _game.GameStateMachine.Enter<BootstrapState>();
-
+            game = new Game(this,configsContainer,loadingCurtain);
+            Game.GameStateMachine.Enter<BootstrapState>();
             DontDestroyOnLoad(this);
         }
     }

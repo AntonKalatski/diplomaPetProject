@@ -1,18 +1,20 @@
-﻿using GameState;
-using Services;
-using Services.GameCamera;
+﻿using Configs.Container;
+using GameSM;
+using Services.GameServiceLocator;
+using UI.Loading;
 
 namespace Bootstrap
 {
     public class Game
     {
-        public static IInputService InputService { get; set; }
-        public static ICameraService CameraService { get; set; }
-        public GameStateMachine GameStateMachine { get; }
+        public static GameConfigsContainer GameConfigs;
+        public static GameStateMachine GameStateMachine { get; private set; }
 
-        public Game()
+        public Game(ICoroutineRunner coroutineRunner, GameConfigsContainer configsContainer,
+            LoadingCurtain curtain)
         {
-            GameStateMachine = new GameStateMachine();
+            GameConfigs = configsContainer;
+            GameStateMachine = new GameStateMachine(new SceneLoader(coroutineRunner),curtain, ServiceLocator.Container);
         }
     }
 }

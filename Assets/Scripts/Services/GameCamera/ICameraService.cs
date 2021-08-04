@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using Services.GameServiceLocator;
+using UnityEngine;
 
 namespace Services.GameCamera
 {
-    public interface ICameraService
+    public interface ICameraService : IService
     {
-        public void SetFollow(Transform transform);
-        public void SetCamera(Camera camera);
-        public Camera GetCamera();
+        Camera GetCamera();
+        void SetFollower(Transform transform);
     }
 }

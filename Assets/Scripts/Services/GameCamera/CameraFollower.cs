@@ -8,10 +8,7 @@ namespace Services.GameCamera
         [SerializeField] private float distance;
         [SerializeField] private float offsetY;
 
-        public void Follow(Transform transform)
-        {
-            following = transform;
-        }
+        public void SetFollowTarget(Transform transform) => following = transform;
 
         private void LateUpdate()
         {

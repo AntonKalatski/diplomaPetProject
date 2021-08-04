@@ -5,27 +5,12 @@ namespace Services.GameCamera
     public class CameraService : ICameraService
     {
         private Camera camera;
-        private CameraFollower cameraFollower;
-
-        public CameraService(Camera camera)
-        {
-            this.camera = camera;
-            if (camera.transform.TryGetComponent<CameraFollower>(out var follower))
-                cameraFollower = follower;
-        }
-
-
-        public void SetFollow(Transform transform)
-        {
-            cameraFollower.Follow(transform);
-        }
-
-        public void SetCamera(Camera camera)
-        {
-            if (!ReferenceEquals(camera, null))
-                this.camera = camera;
-        }
-
         public Camera GetCamera() => camera;
+        public void SetFollower(Transform transform)
+        {
+            camera = ReferenceEquals(camera, Camera.main) ? camera : Camera.main;
+            if (camera.transform.TryGetComponent<CameraFollower>(out var follower))
+                follower.SetFollowTarget(transform);
+        }
     }
 }
