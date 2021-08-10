@@ -1,6 +1,9 @@
-﻿namespace Services.GameServiceLocator
+﻿using System.Collections.Generic;
+
+namespace Services.GameServiceLocator
 {
     public interface IService
     {
+        
     }
 }

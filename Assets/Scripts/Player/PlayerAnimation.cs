@@ -12,7 +12,6 @@ namespace Player
         
         private static readonly int SpeedF = Animator.StringToHash("Speed_f");
         private IInputService inputService;
-
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;
 

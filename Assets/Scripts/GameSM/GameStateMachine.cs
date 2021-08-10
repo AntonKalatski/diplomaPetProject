@@ -5,16 +5,18 @@ using Factories;
 using Factories.Interfaces;
 using GameSM.Interfaces;
 using GameSM.States;
+using Services.GameProgress;
 using Services.GameServiceLocator;
+using Services.SaveLoad;
 using UI.Loading;
 
 namespace GameSM
 {
     public class GameStateMachine
     {
+        private readonly ServiceLocator serviceLocator;
         private Dictionary<Type, IExitableState> states;
         private IExitableState activeState;
-        private readonly ServiceLocator serviceLocator;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, ServiceLocator serviceLocator)
         {
@@ -22,8 +24,12 @@ namespace GameSM
             states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, serviceLocator),
+                [typeof(LoadProgressState)] = new LoadProgressState(this,
+                    serviceLocator.LocateService<IGameProgressService>(),
+                    serviceLocator.LocateService<ISaveLoadService>()),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain,
-                    serviceLocator.LocateService<IGameUIFactory>(), serviceLocator.LocateService<IGamePrefabFactory>()),
+                    serviceLocator.LocateService<IGameUIFactory>(), serviceLocator.LocateService<IGamePrefabFactory>(),
+                    serviceLocator.LocateService<IGameProgressService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader, curtain, serviceLocator),
             };
         }

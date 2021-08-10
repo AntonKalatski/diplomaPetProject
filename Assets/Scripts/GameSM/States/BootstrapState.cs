@@ -1,6 +1,7 @@
 ﻿using Bootstrap;
 using Constants;
 using Factories;
+using Factories.Interfaces;
 using GameSM.Interfaces;
 using Providers.Assets;
 using Services;
@@ -8,6 +9,7 @@ using Services.GameCamera;
 using Services.GameInput;
 using Services.GameProgress;
 using Services.GameServiceLocator;
+using Services.SaveLoad;
 
 namespace GameSM.States
 {
@@ -25,17 +27,17 @@ namespace GameSM.States
             this.stateMachine = stateMachine;
             this.sceneLoader = sceneLoader;
             this.serviceLocator = serviceLocator;
-            
+
             RegisterServices();
         }
 
         public void Enter() => sceneLoader.Load(GameConstants.Loading, onLoaded: EnterLoadLevel);
-        
+
         public void Exit()
         {
         }
 
-        private void EnterLoadLevel() => stateMachine.Enter<LoadLevelState, string>(GameConstants.Main);
+        private void EnterLoadLevel() => stateMachine.Enter<LoadProgressState>();
 
         private void RegisterServices()
         {
@@ -43,9 +45,13 @@ namespace GameSM.States
             serviceLocator.RegisterService<CameraService>(new CameraService());
             serviceLocator.RegisterService<IInputService>(InputService());
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
-            var assetProvider = serviceLocator.LocateService<IAssetProvider>();
-            serviceLocator.RegisterService<IGamePrefabFactory>(new GamePrefabFactory(assetProvider));
-            serviceLocator.RegisterService<IGameUIFactory>(new GameUIFactory(assetProvider));
+            serviceLocator.RegisterService<IGamePrefabFactory>(
+                new GamePrefabFactory(serviceLocator.LocateService<IAssetProvider>()));
+            serviceLocator.RegisterService<IGameUIFactory>(
+                new GameUIFactory(serviceLocator.LocateService<IAssetProvider>()));
+            serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(
+                serviceLocator.LocateService<IGameProgressService>(),
+                serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));
         }
 
         private IInputService InputService()

@@ -3,15 +3,18 @@
 namespace GameData
 {
     [Serializable]
-    public struct PositionOnLevel
+    public class PositionOnLevel
     {
-        public string Level;
-        public VectorPosition Position;
+        public string level;
+        public VectorStruct position;
+        public VectorStruct rotation;
 
-        public PositionOnLevel(string level, VectorPosition position)
+        public PositionOnLevel(string level, VectorStruct position, VectorStruct rotation)
         {
-            Level = level;
-            Position = position;
+            this.level = level;
+            this.position = position;
+            this.rotation = rotation;
         }
+        public PositionOnLevel(string initialLevel) => level = initialLevel;
     }
 }

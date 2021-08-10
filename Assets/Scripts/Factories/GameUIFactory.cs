@@ -1,13 +1,15 @@
 ﻿using Constants;
+using Factories.Interfaces;
 using Providers.Assets;
 
 namespace Factories
 {
-    public class GameUIFactory : IGameUIFactory
+    public class GameUIFactory : AbstractGameFactory, IGameUIFactory
     {
-        private readonly IAssetProvider assetProvider;
+        public GameUIFactory(IAssetProvider assetProvider) : base(assetProvider)
+        {
+        }
 
-        public GameUIFactory(IAssetProvider assetProvider) => this.assetProvider = assetProvider;
-        public void CreateHub() => assetProvider.Instantiate(AssetsPath.Hud);
+        public void CreateHub() => InstantiateRegistered(AssetsPath.Hud);
     }
 }

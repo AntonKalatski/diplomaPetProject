@@ -5,6 +5,11 @@ namespace GameData
     [Serializable]
     public class PlayerProgressData
     {
-        public WorldData WorldData;
+        public WorldData worldData;
+
+        public PlayerProgressData(string initialLevel)
+        {
+            worldData = new WorldData(initialLevel);
+        }
     }
 }

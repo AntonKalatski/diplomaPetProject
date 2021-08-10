@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace Player
 {
-    public class PlayerMovement : MonoBehaviour, IProgressUpdatable
+    public class PlayerMovement : MonoBehaviour, IProgressSaveable
     {
         [SerializeField] private CharacterController characterController;
         [SerializeField, Range(0, 10)] private float movementSpeed;
@@ -38,25 +38,26 @@ namespace Player
             characterController.Move(direction * Time.deltaTime * movementSpeed);
         }
 
-        public void UpdateProgress(PlayerProgressData progressData) =>
-            progressData.WorldData.PositionOnLevel =
-                new PositionOnLevel(GetSceneName(), transform.position.AsVectorPosition());
+        public void SaveProgress(PlayerProgressData progressData) =>
+            progressData.worldData.PositionOnLevel =
+                new PositionOnLevel(GetSceneName(), transform.position.AsVectorPosition(),transform.rotation.eulerAngles.AsVectorPosition());
 
         public void LoadProgress(PlayerProgressData progressData)
         {
-            if (ReferenceEquals(GetSceneName(), progressData.WorldData.PositionOnLevel.Level))
-            {
-                VectorPosition savedPos = progressData.WorldData.PositionOnLevel.Position;
-                MoveToPosition(toPos: savedPos);
-            }
+            if (ReferenceEquals(GetSceneName(), progressData.worldData.PositionOnLevel.level)) return;
+            VectorStruct savedPos = progressData.worldData.PositionOnLevel.position;
+            VectorStruct savedRot = progressData.worldData.PositionOnLevel.rotation;
+            Warp(toPos: savedPos,toRot: savedRot);
         }
 
-        private void MoveToPosition(VectorPosition toPos)
+        private void Warp(VectorStruct toPos, VectorStruct toRot)
         {
-            characterController.Move(toPos.AsUnityVector3());
-            //characterController.enabled = false;
-            // transform.position = savedPos.AsUnityVector3();
-            //characterController.enabled = true;
+            characterController.enabled = false;
+            transform.position = toPos.AsUnityVector3().AddY(characterController.height);
+            var rot = transform.rotation;
+            rot.eulerAngles = toRot.AsUnityVector3();
+            transform.rotation = rot;
+            characterController.enabled = true;
         }
 
         private static string GetSceneName() => SceneManager.GetActiveScene().name;
