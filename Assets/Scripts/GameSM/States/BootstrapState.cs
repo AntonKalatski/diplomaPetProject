@@ -9,6 +9,7 @@ using Services.GameCamera;
 using Services.GameInput;
 using Services.GameProgress;
 using Services.GameServiceLocator;
+using Services.Player;
 using Services.SaveLoad;
 
 namespace GameSM.States
@@ -43,10 +44,12 @@ namespace GameSM.States
         {
             serviceLocator.RegisterService<IAssetProvider>(new AssetProvider());
             serviceLocator.RegisterService<CameraService>(new CameraService());
+            serviceLocator.RegisterService<IPlayerGOService>(new PlayerGOService());
             serviceLocator.RegisterService<IInputService>(InputService());
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
             serviceLocator.RegisterService<IGamePrefabFactory>(
-                new GamePrefabFactory(serviceLocator.LocateService<IAssetProvider>()));
+                new GamePrefabFactory(serviceLocator.LocateService<IAssetProvider>(),
+                    serviceLocator.LocateService<IPlayerGOService>()));
             serviceLocator.RegisterService<IGameUIFactory>(
                 new GameUIFactory(serviceLocator.LocateService<IAssetProvider>()));
             serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(

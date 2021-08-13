@@ -12,7 +12,9 @@ namespace GameSM.States
         private readonly SceneLoader sceneLoader;
         private readonly LoadingCurtain curtain;
 
-        public GameLoopState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
+        public GameLoopState(GameStateMachine gameStateMachine,
+            SceneLoader sceneLoader,
+            LoadingCurtain curtain,
             ServiceLocator serviceLocator)
         {
             this.gameStateMachine = gameStateMachine;

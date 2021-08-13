@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Zombies
 {
+    [RequireComponent(typeof(Animator))]
     public class ZombieAnimator : MonoBehaviour, IAnimatorStateReader
     {
         [SerializeField] private Animator animator;
@@ -31,7 +32,8 @@ namespace Zombies
         {
             animator.SetBool(ZombieIsMoving, true);
             animator.SetFloat(ZombieSpeed, speed);
-        }
+        } 
+        public void StopMoving() => animator.SetBool(ZombieIsMoving, false);
 
         public void EnteredState(int stateHash)
         {
