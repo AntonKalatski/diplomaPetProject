@@ -1,4 +1,5 @@
-﻿using Services.GameServiceLocator;
+﻿using System;
+using Services.GameServiceLocator;
 using UnityEngine;
 
 namespace Services.Player
@@ -6,7 +7,7 @@ namespace Services.Player
     public interface IPlayerGOService : IService
     {
         void SetPlayerGameObject(GameObject player);
-        GameObject GetPlayerGameObject();
-        Transform GetPlayerTransform();
+        void AddPlayerGORefreshListener(Action<GameObject> listener);
+        void RemovePlayerGORefreshListener(Action<GameObject> listener);
     }
 }

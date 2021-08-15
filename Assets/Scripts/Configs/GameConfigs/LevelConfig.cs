@@ -1,7 +1,7 @@
 ﻿using Configs.Container;
 using UnityEngine;
 
-namespace Configs.Configs
+namespace Configs.GameConfigs
 {
     [CreateAssetMenu(menuName = "Game/Configs/LevelConfig", fileName = "LevelConfig")]
     public class LevelConfig : AbstractGameConfig

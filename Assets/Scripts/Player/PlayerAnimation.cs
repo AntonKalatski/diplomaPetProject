@@ -27,5 +27,10 @@ namespace Player
         {
             animator.SetFloat(SpeedF,inputService.Axis.magnitude);
         }
+
+        public void Damage()
+        {
+            
+        }
     }
 }

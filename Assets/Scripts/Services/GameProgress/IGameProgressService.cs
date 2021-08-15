@@ -5,6 +5,7 @@ namespace Services.GameProgress
 {
     public interface IGameProgressService : IService
     {
+        public bool IsNewGame { get; set; }
         PlayerProgressData PlayerProgressData { get; set; }
     }
 }

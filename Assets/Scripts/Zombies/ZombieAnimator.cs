@@ -1,5 +1,6 @@
 ﻿using System;
-using AnimatorBehaviors;
+using AnimatorScripts.Readers;
+using AnimatorScripts.States;
 using UnityEngine;
 
 namespace Zombies
@@ -9,6 +10,7 @@ namespace Zombies
     {
         [SerializeField] private Animator animator;
 
+        private static readonly int ZombieAttack = Animator.StringToHash("zombie_attack");
         private static readonly int ZombieIdle = Animator.StringToHash("zombie_idle");
         private static readonly int ZombieDie = Animator.StringToHash("zombie_die");
         private static readonly int ZombieEating = Animator.StringToHash("zombie_eating");
@@ -19,21 +21,17 @@ namespace Zombies
         public event Action<AnimatorState> StateExited;
         public AnimatorState State { get; private set; }
 
-        private void Awake()
-        {
-            if (ReferenceEquals(animator, null))
-                animator = GetComponent<Animator>();
-        }
-
         public void Death() => animator.SetTrigger(ZombieDie);
         public void Eating() => animator.SetTrigger(ZombieEating);
+        public void Attack() => animator.SetTrigger(ZombieAttack);
+
+        public void StopMoving() => animator.SetBool(ZombieIsMoving, false);
 
         public void Move(float speed)
         {
             animator.SetBool(ZombieIsMoving, true);
             animator.SetFloat(ZombieSpeed, speed);
-        } 
-        public void StopMoving() => animator.SetBool(ZombieIsMoving, false);
+        }
 
         public void EnteredState(int stateHash)
         {

@@ -1,6 +1,6 @@
-﻿using AnimatorBehaviors;
+﻿using AnimatorScripts.States;
 
-namespace Zombies
+namespace AnimatorScripts.Readers
 {
     public interface IAnimatorStateReader
     {

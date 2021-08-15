@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameConfigsContainer
   m_EditorClassIdentifier: 
   configs:
-  - {fileID: 11400000, guid: c372b7b1725058a48828f9d98378d49b, type: 2}
   - {fileID: 11400000, guid: ddc4d775ce009174bad0a08c32b1f937, type: 2}
   - {fileID: 11400000, guid: a2e4a3edb4d82cf42a48590024ef37f1, type: 2}
+  - {fileID: 11400000, guid: 279b31f40325d8f429a9efe3da2f554c, type: 2}

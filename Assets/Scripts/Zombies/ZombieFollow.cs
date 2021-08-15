@@ -10,24 +10,25 @@ namespace Zombies
     {
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private float minDest;
-        private IPlayerGOService playerGO;
+        private IPlayerGOService playerService;
         private Transform survTransform;
-
-        private void Awake() => agent ??= GetComponent<NavMeshAgent>();
-
-        private void Start()
+        private void Awake()
         {
-            playerGO = ServiceLocator.Container.LocateService<IPlayerGOService>();
-            if (!ReferenceEquals(playerGO.GetPlayerGameObject(), null))
-                InitializeSurvivorTransform();
+            agent.stoppingDistance = minDest;
+            playerService = ServiceLocator.Container.LocateService<IPlayerGOService>();
+            playerService.AddPlayerGORefreshListener(InitializeSurvivorTransform);
         }
-
-        private void InitializeSurvivorTransform() => survTransform = playerGO.GetPlayerTransform();
 
         private void Update()
         {
             if (IsSurvivorInitialized() && DestinationToHero())
                 agent.destination = survTransform.position;
+        }
+
+        private void InitializeSurvivorTransform(GameObject player)
+        {
+            survTransform = player.transform;
+            playerService.RemovePlayerGORefreshListener(InitializeSurvivorTransform);
         }
 
         private bool IsSurvivorInitialized() => !ReferenceEquals(survTransform, null);

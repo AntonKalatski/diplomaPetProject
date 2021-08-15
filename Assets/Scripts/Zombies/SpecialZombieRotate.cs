@@ -1,5 +1,4 @@
-﻿using Factories.Interfaces;
-using Services.GameServiceLocator;
+﻿using Services.GameServiceLocator;
 using Services.Player;
 using UnityEngine;
 
@@ -9,19 +8,21 @@ namespace Zombies
     {
         [SerializeField] private float minDest;
         [SerializeField] private float speed;
-        private IPlayerGOService playerGO;
-
+        private IPlayerGOService playerService;
         private Transform survTransform;
         private Vector3 lookDirection;
 
-        private void Start()
+        private void Awake()
         {
-            playerGO = ServiceLocator.Container.LocateService<IPlayerGOService>();
-            if (!ReferenceEquals(playerGO.GetPlayerTransform(), null))
-                InitializeSurvivorTransform();
+            playerService = ServiceLocator.Container.LocateService<IPlayerGOService>();
+            playerService.AddPlayerGORefreshListener(InitializeSurvivorTransform);
         }
 
-        private void InitializeSurvivorTransform() => survTransform = playerGO.GetPlayerTransform();
+        private void InitializeSurvivorTransform(GameObject player)
+        {
+            survTransform = player.transform;
+            playerService.RemovePlayerGORefreshListener(InitializeSurvivorTransform);
+        }
 
         private void Update()
         {
@@ -41,7 +42,9 @@ namespace Zombies
             lookDirection = new Vector3(delta.x, transform.position.y, delta.z);
         }
 
-        private Quaternion SmoothRotation(Quaternion rotation, Vector3 direction) => Quaternion.Lerp(rotation, Quaternion.LookRotation(direction), speed * Time.deltaTime);
+        private Quaternion SmoothRotation(Quaternion rotation, Vector3 direction) =>
+            Quaternion.Lerp(rotation, Quaternion.LookRotation(direction), speed * Time.deltaTime);
+
         private bool IsInitialized() => IsSurvivorInitialized() && DestinationToHero();
         private bool IsSurvivorInitialized() => !ReferenceEquals(survTransform, null);
         private bool DestinationToHero() => Vector3.Distance(transform.position, survTransform.position) > minDest;

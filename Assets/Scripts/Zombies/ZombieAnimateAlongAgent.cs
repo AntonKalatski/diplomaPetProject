@@ -11,12 +11,6 @@ namespace Zombies
         [SerializeField] private ZombieAnimator anim;
         [SerializeField] private float minVelocity = 0.1f;
 
-        private void Awake()
-        {
-            agent ??= GetComponent<NavMeshAgent>();
-            anim ??= GetComponent<ZombieAnimator>();
-        }
-
         private void Update()
         {
             if (CanMove())

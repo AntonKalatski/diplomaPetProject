@@ -1,4 +1,4 @@
-﻿namespace AnimatorBehaviors
+﻿namespace AnimatorScripts.States
 {
     public enum AnimatorState
     {

@@ -33,9 +33,15 @@ namespace GameSM.States
         {
         }
 
-        private void TryLoadProgress() =>
-            gameProgressService.PlayerProgressData = saveLoadService.LoadProgress() ?? NewProgress();
+        private void TryLoadProgress() => gameProgressService.PlayerProgressData = saveLoadService.LoadProgress() ?? NewProgress();
 
-        private PlayerProgressData NewProgress() => new PlayerProgressData(GameConstants.Main);
+        private PlayerProgressData NewProgress()
+        {
+            gameProgressService.IsNewGame = true;
+            var progress = new PlayerProgressData(GameConstants.Main);
+            progress.playerState.maxHp = 100;
+            progress.playerState.ResetHp();
+            return progress;
+        }
     }
 }

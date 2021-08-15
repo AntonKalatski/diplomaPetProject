@@ -58,14 +58,17 @@ namespace GameSM.States
         private void OnLevelLoaded()
         {
             InitializeGameWorld();
-            InformProgressReaders();
+            if (!gameProgressService.IsNewGame)
+                InformProgressReaders();
+
             gameStateMachine.Enter<GameLoopState>();
         }
 
         private void InitializeGameWorld()
         {
+            var configProvider = Object.FindObjectOfType<LevelConfigProvider>();
             GameObject survivor =
-                prefabFactory.CreateSurvivor(atPoint: Object.FindObjectOfType<LevelConfigProvider>().GetSpawnPoint());
+                prefabFactory.CreateSurvivor(atPoint: configProvider.GetSpawnPoint());
             uiFactory.CreateHub();
             var cameraService = ServiceLocator.Container.LocateService<CameraService>();
             cameraService.SetFollower(survivor.transform);
