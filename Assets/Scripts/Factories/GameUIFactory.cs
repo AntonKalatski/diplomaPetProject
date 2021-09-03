@@ -1,6 +1,7 @@
 ﻿using Constants;
 using Factories.Interfaces;
 using Providers.Assets;
+using UnityEngine;
 
 namespace Factories
 {
@@ -10,6 +11,6 @@ namespace Factories
         {
         }
 
-        public void CreateHub() => InstantiateRegistered(AssetsPath.Hud);
+        public GameObject CreateHud() => InstantiateRegistered(AssetsPath.Hud);
     }
 }

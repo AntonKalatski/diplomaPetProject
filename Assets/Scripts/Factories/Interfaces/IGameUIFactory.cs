@@ -1,7 +1,9 @@
-﻿namespace Factories.Interfaces
+﻿using UnityEngine;
+
+namespace Factories.Interfaces
 {
     public interface IGameUIFactory : IGameFactory
     {
-        void CreateHub();
+        GameObject CreateHud();
     }
 }

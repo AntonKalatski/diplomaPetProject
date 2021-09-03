@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using Bootstrap;
+using Extensions;
 using Factories.Interfaces;
+using GameElements.Health;
 using GameSM.Interfaces;
+using Player;
 using Providers;
 using Services.GameCamera;
 using Services.GameProgress;
 using Services.GameServiceLocator;
+using UI.Actors;
 using UI.Loading;
 using UnityEngine;
 
@@ -20,6 +24,7 @@ namespace GameSM.States
         private readonly SceneLoader sceneLoader;
         private readonly LoadingCurtain curtain;
         private List<IGameFactory> factories;
+        private LevelConfigProvider levelConfig;
 
         public LoadLevelState(
             GameStateMachine gameStateMachine,
@@ -57,29 +62,44 @@ namespace GameSM.States
 
         private void OnLevelLoaded()
         {
+            GetCurrentLevelConfig();
             InitializeGameWorld();
-            if (!gameProgressService.IsNewGame)
-                InformProgressReaders();
-
+            InformProgressReaders();
             gameStateMachine.Enter<GameLoopState>();
         }
 
+        private void GetCurrentLevelConfig() => levelConfig = Object.FindObjectOfType<LevelConfigProvider>();
+
         private void InitializeGameWorld()
         {
-            var configProvider = Object.FindObjectOfType<LevelConfigProvider>();
-            GameObject survivor =
-                prefabFactory.CreateSurvivor(atPoint: configProvider.GetSpawnPoint());
-            uiFactory.CreateHub();
-            var cameraService = ServiceLocator.Container.LocateService<CameraService>();
-            cameraService.SetFollower(survivor.transform);
+            var survivor = InitializePlayer();
+            ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
+            InitializeHud(survivor.GetComponent<IHealth>());
+        }
+
+        private void InitializeHud(IHealth playerHealth) =>
+            uiFactory.CreateHud().GetComponent<ActorUI>().Initialize(playerHealth);
+
+        private GameObject InitializePlayer()
+        {
+            InitializeSpawnPoint();
+            var spawnPoint = gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position.AsUnityVector3();
+            GameObject survivor = prefabFactory.CreateSurvivor(spawnPoint);
+            return survivor;
+        }
+
+        private void InitializeSpawnPoint()
+        {
+            if (!gameProgressService.IsNewGame)
+                return;
+            gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position =
+                levelConfig.GetSpawnPoint().transform.position.AsVectorPosition();
         }
 
         private void InformProgressReaders()
         {
             foreach (IGameFactory factory in factories)
-            {
                 factory.ProgressLoadables.ForEach(x => x.LoadProgress(gameProgressService.PlayerProgressData));
-            }
         }
     }
 }

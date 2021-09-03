@@ -5,6 +5,6 @@ namespace Factories.Interfaces
 {
     public interface IGamePrefabFactory : IGameFactory
     {
-        GameObject CreateSurvivor(GameObject atPoint);
+        GameObject CreateSurvivor(Vector3 atPoint);
     }
 }

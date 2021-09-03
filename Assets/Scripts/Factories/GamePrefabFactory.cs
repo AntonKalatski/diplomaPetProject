@@ -10,14 +10,15 @@ namespace Factories
     public class GamePrefabFactory : AbstractGameFactory, IGamePrefabFactory
     {
         private readonly IPlayerGOService playerGOService;
+
         public GamePrefabFactory(IAssetProvider assetProvider, IPlayerGOService playerGOService) : base(assetProvider)
         {
             this.playerGOService = playerGOService;
         }
 
-        public GameObject CreateSurvivor(GameObject atPoint)
+        public GameObject CreateSurvivor(Vector3 atPoint)
         {
-            var player = InstantiateRegistered(AssetsPath.FemaleSurvivor, atPoint.transform.position);
+            var player = InstantiateRegistered(AssetsPath.FemaleSurvivor, atPoint);
             playerGOService.SetPlayerGameObject(player);
             return player;
         }

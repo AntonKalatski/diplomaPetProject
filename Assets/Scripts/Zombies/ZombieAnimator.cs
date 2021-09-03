@@ -25,6 +25,10 @@ namespace Zombies
         public void Eating() => animator.SetTrigger(ZombieEating);
         public void Attack() => animator.SetTrigger(ZombieAttack);
 
+        public void TakeDamage()//todo make damage for zomibe
+        {
+            Debug.Log("Zombie taking damage");
+        }
         public void StopMoving() => animator.SetBool(ZombieIsMoving, false);
 
         public void Move(float speed)
@@ -57,5 +61,6 @@ namespace Zombies
                 state = AnimatorState.Unknown;
             return state;
         }
+
     }
 }

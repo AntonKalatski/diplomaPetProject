@@ -7,11 +7,13 @@ namespace GameData
     {
         public WorldData worldData;
         public PlayerState playerState;
+        public PlayerStats playerStats;
 
         public PlayerProgressData(string initialLevel)
         {
             worldData = new WorldData(initialLevel);
             playerState = new PlayerState();
+            playerStats = new PlayerStats();
         }
     }
 }

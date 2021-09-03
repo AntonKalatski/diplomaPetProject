@@ -49,6 +49,7 @@ namespace Player
 
         public void LoadProgress(PlayerProgressData progressData)
         {
+            Debug.Log("Load progress in player movement");
             if (ReferenceEquals(GetSceneName(), progressData.worldData.PositionOnLevel.level)) return;
             VectorStruct savedPos = progressData.worldData.PositionOnLevel.position;
             VectorStruct savedRot = progressData.worldData.PositionOnLevel.rotation;

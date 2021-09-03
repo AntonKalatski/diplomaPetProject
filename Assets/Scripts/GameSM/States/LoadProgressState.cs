@@ -41,6 +41,8 @@ namespace GameSM.States
             var progress = new PlayerProgressData(GameConstants.Main);
             progress.playerState.maxHp = 100;
             progress.playerState.ResetHp();
+            progress.playerStats.Damage = 50f;
+            progress.playerStats.DamageRadius = 2.5f;
             return progress;
         }
     }

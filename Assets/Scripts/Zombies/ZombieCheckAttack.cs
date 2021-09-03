@@ -18,9 +18,6 @@ namespace Zombies
 
         private void TriggerExitHandler(Collider obj) => SwitchZombieAttack(false);
         private void TriggerEnterHandler(Collider obj) => SwitchZombieAttack(true);
-        private void SwitchZombieAttack(bool canAttack)
-        {
-            attack.enabled = canAttack;
-        }
+        private void SwitchZombieAttack(bool canAttack) => attack.enabled = canAttack;
     }
 }
