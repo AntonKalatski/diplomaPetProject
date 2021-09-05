@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Bootstrap;
 using Extensions;
 using Factories.Interfaces;
@@ -9,6 +10,7 @@ using Providers;
 using Services.GameCamera;
 using Services.GameProgress;
 using Services.GameServiceLocator;
+using Spawner;
 using UI.Actors;
 using UI.Loading;
 using UnityEngine;
@@ -25,6 +27,7 @@ namespace GameSM.States
         private readonly LoadingCurtain curtain;
         private List<IGameFactory> factories;
         private LevelConfigProvider levelConfig;
+        private ZombieSpawnersProvider zombieSpawners;
 
         public LoadLevelState(
             GameStateMachine gameStateMachine,
@@ -58,27 +61,36 @@ namespace GameSM.States
             factories = new List<IGameFactory>();
             factories.Add(prefabFactory);
             factories.Add(uiFactory);
+            factories.Add(uiFactory);
         }
 
         private void OnLevelLoaded()
         {
-            GetCurrentLevelConfig();
             InitializeGameWorld();
             InformProgressReaders();
             gameStateMachine.Enter<GameLoopState>();
         }
 
         private void GetCurrentLevelConfig() => levelConfig = Object.FindObjectOfType<LevelConfigProvider>();
+        private void GetZombieSpawners() => zombieSpawners = Object.FindObjectOfType<ZombieSpawnersProvider>();
 
         private void InitializeGameWorld()
         {
+            InitializeZombieSpawners();
+            
             var survivor = InitializePlayer();
             ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
             InitializeHud(survivor.GetComponent<IHealth>());
         }
 
-        private void InitializeHud(IHealth playerHealth) =>
-            uiFactory.CreateHud().GetComponent<ActorUI>().Initialize(playerHealth);
+        private void InitializeZombieSpawners()
+        {
+            GetZombieSpawners();
+            foreach (ZombieSpawner spawner in zombieSpawners.GetZombieSpawners())
+            {
+                factories.ForEach(x => x.Register(spawner.gameObject));
+            }
+        }
 
         private GameObject InitializePlayer()
         {
@@ -88,8 +100,13 @@ namespace GameSM.States
             return survivor;
         }
 
+        private void InitializeHud(IHealth playerHealth) =>
+            uiFactory.CreateHud().GetComponent<ActorUI>().Initialize(playerHealth);
+
         private void InitializeSpawnPoint()
         {
+            GetCurrentLevelConfig();
+            
             if (!gameProgressService.IsNewGame)
                 return;
             gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position =

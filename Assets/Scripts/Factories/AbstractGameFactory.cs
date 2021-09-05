@@ -17,6 +17,8 @@ namespace Factories
             this.assetProvider = assetProvider;
         }
 
+        public void Register(GameObject gameObject) => RegisterProgressLoaders(gameObject);
+
         public void CleanUp()
         {
             ProgressLoadables.Clear();
