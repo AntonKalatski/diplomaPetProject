@@ -17,14 +17,16 @@ namespace Factories
             this.assetProvider = assetProvider;
         }
 
-        public void Register(GameObject gameObject) => RegisterProgressLoaders(gameObject);
+        public void Register(GameObject gameObject)
+        {
+            RegisterProgressLoaders(gameObject);
+        }
 
         public void CleanUp()
         {
             ProgressLoadables.Clear();
             ProgressSaveables.Clear();
         }
-
         protected GameObject InstantiateRegistered(string prefabPath, Vector3 at)
         {
             GameObject gameObject = assetProvider.Instantiate(prefabPath, position: at);

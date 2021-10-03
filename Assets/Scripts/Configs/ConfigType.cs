@@ -4,6 +4,7 @@
     {
         InputConfig,
         CameraConfig,
-        LevelConfig
+        LevelConfig,
+        PlayerConfig,
     }
 }

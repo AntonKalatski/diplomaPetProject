@@ -11,27 +11,22 @@ namespace Services.SaveLoad
     {
         private const string ProgressKey = "progress";
         private readonly IGameProgressService gameProgressService;
-        private List<IGameFactory> factories;
+        private readonly IGamePrefabFactory gamePrefabFactory;
+        private readonly IGameUIFactory gameUIFactory;
 
         public SaveLoadService(IGameProgressService gameProgressService,
             IGamePrefabFactory gamePrefabFactory,
             IGameUIFactory gameUIFactory)
         {
-            InitializeGameFactories(gamePrefabFactory, gameUIFactory);
             this.gameProgressService = gameProgressService;
-        }
-
-        private void InitializeGameFactories(IGamePrefabFactory prefabFactory, IGameUIFactory uiFactory)
-        {
-            factories = new List<IGameFactory>();
-            factories.Add(prefabFactory);
-            factories.Add(uiFactory);
+            this.gamePrefabFactory = gamePrefabFactory;
+            this.gameUIFactory = gameUIFactory;
         }
 
         public void SaveProgress()
         {
-            foreach (IGameFactory factory in factories)
-                factory.ProgressSaveables.ForEach(x => x.SaveProgress(gameProgressService.PlayerProgressData));
+            gamePrefabFactory.ProgressSaveables.ForEach(x => x.SaveProgress(gameProgressService.PlayerProgressData));
+            gameUIFactory.ProgressSaveables.ForEach(x => x.SaveProgress(gameProgressService.PlayerProgressData));
             PlayerPrefs.SetString(ProgressKey, gameProgressService.PlayerProgressData.ToJson());
         }
 

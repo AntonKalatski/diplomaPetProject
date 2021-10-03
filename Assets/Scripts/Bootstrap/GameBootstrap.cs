@@ -8,12 +8,11 @@ namespace Bootstrap
     public class GameBootstrap : MonoBehaviour, ICoroutineRunner
     {
         [SerializeField] private LoadingCurtain loadingScreenPrefab;
-        [SerializeField] private GameConfigsContainer configsContainer;
         private Game game;
 
         private void Awake()
         {
-            game = new Game(this, configsContainer, Instantiate(loadingScreenPrefab));
+            game = new Game(this, Instantiate(loadingScreenPrefab));
             Game.GameStateMachine.Enter<BootstrapState>();
             DontDestroyOnLoad(this);
         }

@@ -19,7 +19,6 @@ namespace Triggers.Save
         private void OnTriggerEnter(Collider other)
         {
             saveLoadService.SaveProgress();
-            Debug.Log("Progress saved");
             gameObject.SetActive(false);
         }
 

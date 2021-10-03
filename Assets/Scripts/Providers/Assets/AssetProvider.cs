@@ -15,5 +15,11 @@ namespace Providers.Assets
             var prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, position, Quaternion.identity);
         }
+
+        public GameObject Instantiate(string path, Transform transform)
+        {
+            var prefab = Resources.Load<GameObject>(path);
+            return Object.Instantiate(prefab, transform);
+        }
     }
 }

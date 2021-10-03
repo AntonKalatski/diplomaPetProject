@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine.Serialization;
 
 namespace GameData
 {
@@ -10,6 +9,7 @@ namespace GameData
         public PlayerState playerState;
         public PlayerStats playerStats;
         public KillData killData;
+        public LootData lootData;
 
         public PlayerProgressData(string initialLevel)
         {
@@ -17,6 +17,8 @@ namespace GameData
             playerState = new PlayerState();
             playerStats = new PlayerStats();
             killData = new KillData();
+            lootData = new LootData();
         }
+
     }
 }

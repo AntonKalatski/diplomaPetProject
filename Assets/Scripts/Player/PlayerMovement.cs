@@ -58,14 +58,14 @@ namespace Player
 
         private void Warp(VectorStruct toPos, VectorStruct toRot)
         {
-            characterController.enabled = false;
-            rb.isKinematic = true;
+            // characterController.enabled = false;
+            // rb.isKinematic = true;
             transform.position = toPos.AsUnityVector3().AddY(characterController.height);
             var rot = transform.rotation;
             rot.eulerAngles = toRot.AsUnityVector3();
             transform.rotation = rot;
-            characterController.enabled = true;
-            rb.isKinematic = false;
+            // characterController.enabled = true;
+            // rb.isKinematic = false;
         }
 
         private static string GetSceneName() => SceneManager.GetActiveScene().name;

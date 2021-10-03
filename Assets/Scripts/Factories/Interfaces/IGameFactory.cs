@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Player;
 using Services.GameServiceLocator;
-using UnityEngine;
 
 namespace Factories.Interfaces
 {
@@ -9,7 +8,6 @@ namespace Factories.Interfaces
     {
         List<IProgressLoadable> ProgressLoadables { get; }
         List<IProgressSaveable> ProgressSaveables { get; }
-        void Register(GameObject gameObject);
         void CleanUp();
     }
 }

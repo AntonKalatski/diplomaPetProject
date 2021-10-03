@@ -21,7 +21,7 @@ namespace Zombies
         [SerializeField] private Transform survTransform;
         [SerializeField] private bool isAttacking;
         [SerializeField] private float temp;
-        private IPlayerGOService playerService;
+        private IPlayerGameObjectProvider playerService;
         private IHealth playerHealth;
         private int layerMask;
         private bool isAttackActive;
@@ -45,14 +45,12 @@ namespace Zombies
         private void Awake()
         {
             layerMask = 1 << LayerMask.NameToLayer("Player");
-            playerService = ServiceLocator.Container.LocateService<IPlayerGOService>();
-            playerService.AddPlayerGORefreshListener(InitializeSurvivorTransform);
+            playerService = ServiceLocator.Container.LocateService<IPlayerGameObjectProvider>();
         }
 
-        private void InitializeSurvivorTransform(GameObject player)
+        public void Initialize(GameObject player)
         {
             survTransform = player.transform;
-            playerService.RemovePlayerGORefreshListener(InitializeSurvivorTransform);
         }
 
         private bool ZombieHit(out Collider hit)

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588db2e787c4428f9c65190e64ee5c91, type: 3}
+  m_Name: City
+  m_EditorClassIdentifier: 
+  LevelKey: Main
+  zombieSpawners:
+  - Id: Main_7de37898-f909-4e2b-875d-485f6e69a6d7
+    zombieType: 2
+    Position: {x: 13.01, y: 0, z: 44.16}
+  - Id: Main_0bdcc8cb-b43f-4f98-94c8-a796db029eda
+    zombieType: 3
+    Position: {x: 14.68, y: 0, z: 66.03}
+  - Id: Main_760582ca-e9c6-40b1-932d-b58728531940
+    zombieType: 3
+    Position: {x: 5.74, y: 0, z: 56.45}
+  - Id: Main_d2f6a2fc-a0e5-4ffc-9d3d-76e0ffb74026
+    zombieType: 2
+    Position: {x: 6.16, y: 0, z: 70.56}
+  - Id: Main_dc81ef3c-2c08-489d-b3a2-27d2bac2bbe4
+    zombieType: 1
+    Position: {x: -3.21, y: 0, z: 47.97}
+  - Id: Main_1f8e932f-8c09-42b3-87c0-39b2df7738a5
+    zombieType: 0
+    Position: {x: -6.3, y: 0, z: 26.23}
