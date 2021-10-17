@@ -67,9 +67,13 @@ namespace GameSM.States
 
             var survivor = InitializePlayer();
             
-            ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
+            InitializeUiRoot();
             InitializeHud(survivor.GetComponent<IHealth>());
+            
+            ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
         }
+
+     
 
         private void InitializeZombieSpawners()
         {
@@ -86,6 +90,7 @@ namespace GameSM.States
             GameObject survivor = prefabFactory.CreateSurvivor(spawnPoint);
             return survivor;
         }
+        private void InitializeUiRoot() => uiFactory.CreateUIRoot();
 
         private void InitializeHud(IHealth playerHealth) =>
             uiFactory.CreateHud().GetComponent<ActorUI>().Initialize(playerHealth);

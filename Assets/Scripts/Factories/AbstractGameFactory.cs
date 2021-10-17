@@ -8,7 +8,7 @@ namespace Factories
 {
     public abstract class AbstractGameFactory : IGameFactory
     {
-        private readonly IAssetProvider assetProvider;
+        protected readonly IAssetProvider assetProvider;
         public List<IProgressLoadable> ProgressLoadables { get; } = new List<IProgressLoadable>();
         public List<IProgressSaveable> ProgressSaveables { get; } = new List<IProgressSaveable>();
 
@@ -17,7 +17,7 @@ namespace Factories
             this.assetProvider = assetProvider;
         }
 
-        public void Register(GameObject gameObject)
+        protected void Register(GameObject gameObject)
         {
             RegisterProgressLoaders(gameObject);
         }
@@ -27,16 +27,18 @@ namespace Factories
             ProgressLoadables.Clear();
             ProgressSaveables.Clear();
         }
-        protected GameObject InstantiateRegistered(string prefabPath, Vector3 at)
-        {
-            GameObject gameObject = assetProvider.Instantiate(prefabPath, position: at);
-            RegisterProgressLoaders(gameObject);
-            return gameObject;
-        }
+        protected GameObject Instantiate(string prefabPath) => assetProvider.Instantiate(prefabPath);
 
         protected GameObject InstantiateRegistered(string prefabPath)
         {
             GameObject gameObject = assetProvider.Instantiate(prefabPath);
+            RegisterProgressLoaders(gameObject);
+            return gameObject;
+        }
+
+        protected GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        {
+            GameObject gameObject = assetProvider.Instantiate(prefabPath, position: at);
             RegisterProgressLoaders(gameObject);
             return gameObject;
         }

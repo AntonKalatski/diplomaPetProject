@@ -14,6 +14,7 @@ using Services.GameServiceLocator;
 using Services.Player;
 using Services.Random;
 using Services.SaveLoad;
+using UI.Services;
 
 namespace GameSM.States
 {
@@ -59,9 +60,14 @@ namespace GameSM.States
                     serviceLocator.LocateService<IConfigsService>(),
                     serviceLocator.LocateService<IRandomService>(),
                     serviceLocator.LocateService<IGameProgressService>()));
-            serviceLocator.RegisterService<IGameUIFactory>(
-                new GameUIFactory(serviceLocator.LocateService<IGameProgressService>(),
-                    serviceLocator.LocateService<IAssetProvider>()));
+            serviceLocator.RegisterService<IGameUIFactory>(new GameUIFactory(
+                serviceLocator.LocateService<IGameProgressService>(),
+                serviceLocator.LocateService<IAssetProvider>(),
+                serviceLocator.LocateService<IConfigsService>(),serviceLocator));
+            serviceLocator.RegisterService<IScreenService>(
+                new ScreenService(serviceLocator.LocateService<IGameUIFactory>()));
+
+
             serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));

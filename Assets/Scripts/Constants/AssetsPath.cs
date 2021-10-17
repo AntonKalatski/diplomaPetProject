@@ -14,6 +14,8 @@ namespace Constants
         #region UIPrefabs
 
         public const string Hud = "UI/Hud/Hud";
+        public const string UIRoot = "UI/UIRoot/UIRoot";
+        
 
         #endregion
 

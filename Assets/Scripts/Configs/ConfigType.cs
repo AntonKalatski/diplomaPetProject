@@ -6,5 +6,6 @@
         CameraConfig,
         LevelConfig,
         PlayerConfig,
+        ScreenConfig,
     }
 }
