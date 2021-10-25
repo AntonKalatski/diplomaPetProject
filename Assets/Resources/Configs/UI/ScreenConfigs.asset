@@ -16,3 +16,5 @@ MonoBehaviour:
   screens:
   - type: 1
     prefab: {fileID: 1173515745696773828, guid: 55c5009a8858f304ca57e76b62eec653, type: 3}
+  - type: 2
+    prefab: {fileID: 0}

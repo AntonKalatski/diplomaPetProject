@@ -5,6 +5,7 @@ using Factories.Interfaces;
 using GameSM.Interfaces;
 using Providers.Assets;
 using Services;
+using Services.Ads;
 using Services.Configs;
 using Services.Configs.Zombie;
 using Services.GameCamera;
@@ -48,22 +49,16 @@ namespace GameSM.States
         {
             RegisterConfigsService();
             RegisterRandomService();
+            RegisterAdsService();
             serviceLocator.RegisterService<IAssetProvider>(new AssetProvider());
             serviceLocator.RegisterService<CameraService>(new CameraService());
             serviceLocator.RegisterService<IPlayerGameObjectProvider>(new PlayerGameObjectProvider());
             serviceLocator.RegisterService<IInputService>(InputService());
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
 
-            serviceLocator.RegisterService<IGamePrefabFactory>(
-                new GamePrefabFactory(serviceLocator.LocateService<IAssetProvider>(),
-                    serviceLocator.LocateService<IPlayerGameObjectProvider>(),
-                    serviceLocator.LocateService<IConfigsService>(),
-                    serviceLocator.LocateService<IRandomService>(),
-                    serviceLocator.LocateService<IGameProgressService>()));
-            serviceLocator.RegisterService<IGameUIFactory>(new GameUIFactory(
-                serviceLocator.LocateService<IGameProgressService>(),
-                serviceLocator.LocateService<IAssetProvider>(),
-                serviceLocator.LocateService<IConfigsService>(),serviceLocator));
+            RegisterGamePrefabFactory();
+            RegisterGameUiFactory();
+
             serviceLocator.RegisterService<IScreenService>(
                 new ScreenService(serviceLocator.LocateService<IGameUIFactory>()));
 
@@ -71,6 +66,13 @@ namespace GameSM.States
             serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));
+        }
+
+        private void RegisterAdsService()
+        {
+            var adsService = new AdsService();
+            adsService.Initialize();
+            serviceLocator.RegisterService<IAdsService>(adsService);
         }
 
         private void RegisterConfigsService()
@@ -84,6 +86,24 @@ namespace GameSM.States
         {
             IRandomService randomService = new RandomService();
             serviceLocator.RegisterService(randomService);
+        }
+
+        private void RegisterGamePrefabFactory()
+        {
+            serviceLocator.RegisterService<IGamePrefabFactory>(
+                new GamePrefabFactory(serviceLocator.LocateService<IAssetProvider>(),
+                    serviceLocator.LocateService<IPlayerGameObjectProvider>(),
+                    serviceLocator.LocateService<IConfigsService>(),
+                    serviceLocator.LocateService<IRandomService>(),
+                    serviceLocator.LocateService<IGameProgressService>()));
+        }
+
+        private void RegisterGameUiFactory()
+        {
+            serviceLocator.RegisterService<IGameUIFactory>(new GameUIFactory(
+                serviceLocator.LocateService<IGameProgressService>(),
+                serviceLocator.LocateService<IAssetProvider>(),
+                serviceLocator.LocateService<IConfigsService>(), serviceLocator));
         }
 
         private IInputService InputService()
