@@ -1,26 +1,20 @@
 ﻿using System;
 using Factories.Interfaces;
+using Services.GameServiceLocator;
 
 namespace UI.Services
 {
     public class ScreenService : IScreenService
     {
-        private readonly IGameUIFactory uiFactory;
-
-        public ScreenService(IGameUIFactory uiFactory)
-        {
-            this.uiFactory = uiFactory;
-        }
-
         public void Open(ScreenType type)
         {
             switch (type)
             {
                 case ScreenType.Unknown:
-                    
+
                     break;
                 case ScreenType.Shop:
-                    uiFactory.CreateShop();
+                    ServiceLocator.Container.LocateService<IGameUIFactory>().CreateShop();
                     break;
                 case ScreenType.MainMenu:
 

@@ -8,7 +8,7 @@ namespace GameData
     {
         public Dictionary<LootType, int> playersLoot = new Dictionary<LootType, int>();
 
-        public void CollectLootItem(LootItem item)
+        public void AddLootItem(LootItem item)
         {
             if (!playersLoot.ContainsKey(item.type))
                 playersLoot.Add(item.type, item.value);

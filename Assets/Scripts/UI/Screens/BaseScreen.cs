@@ -11,7 +11,7 @@ namespace UI.Screens
         private IGameProgressService progressService;
         protected PlayerProgressData Progress => progressService.PlayerProgressData;
 
-        public void Construct(IGameProgressService progressService)
+        protected virtual void Construct(IGameProgressService progressService)
         {
             this.progressService = progressService;
         }

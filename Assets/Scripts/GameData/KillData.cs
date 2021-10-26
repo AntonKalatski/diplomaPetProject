@@ -9,9 +9,9 @@ namespace GameData
         public List<string> clearedSpawners = new List<string>();
         public int killedZombies;
         private Action onZombieKilled;
-        public void ZombieKilled()
+        public void AddSkullCount(int amount)
         {
-            killedZombies++;
+            killedZombies+=amount;
             onZombieKilled?.Invoke();
         }
 

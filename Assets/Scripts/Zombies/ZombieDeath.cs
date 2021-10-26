@@ -2,6 +2,7 @@
 using Effects;
 using GameData;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Zombies
 {
@@ -12,6 +13,7 @@ namespace Zombies
         [SerializeField] private ZombieHealth zombieHealth;
         [SerializeField] private ZombieFollow zombieFollow;
         [SerializeField] private BloodPuddleEffect bloodPuddle;
+        
         private PlayerProgressData playerProgressData;
         private Action onZombieDeath;
 
@@ -37,7 +39,8 @@ namespace Zombies
         private void ZombieDie()
         {
             zombieHealth.RemoveOnHealthChangeListener(ZombieHealthChangeHandler);
-            playerProgressData.killData.ZombieKilled();
+            //todo remake
+            playerProgressData.killData.AddSkullCount(UnityEngine.Random.Range(1,5));
             zombieAnimator.Death();
             zombieFollow.enabled = false;
             onZombieDeath?.Invoke();

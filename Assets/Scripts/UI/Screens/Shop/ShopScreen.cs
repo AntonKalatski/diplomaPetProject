@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using Services.Ads;
+using Services.GameProgress;
+using TMPro;
 using UnityEngine;
 
 namespace UI.Screens.Shop
@@ -7,6 +9,13 @@ namespace UI.Screens.Shop
     {
         [SerializeField] private RewardedAdItem adItem;
         [SerializeField] private TMP_Text killCounter;
+
+        public void Construct(IAdsService adsService, IGameProgressService progressService)
+        {
+            base.Construct(progressService);
+            adItem.Construct(adsService,progressService);
+        }
+
         protected override void Initialize()
         {
             adItem.Initialize();

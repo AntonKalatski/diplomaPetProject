@@ -23,7 +23,7 @@ namespace Behaviours.Loot
             if (isPicked)
                 return;
             isPicked = true;
-            playerProgressData.lootData.CollectLootItem(lootItem);
+            playerProgressData.lootData.AddLootItem(lootItem);
             pickUpFxPrefab.SetActive(false);
             pickUpView.SetActive(false);
             StartCoroutine(StartDestroyRoutine());

@@ -55,12 +55,10 @@ namespace GameSM.States
             serviceLocator.RegisterService<IPlayerGameObjectProvider>(new PlayerGameObjectProvider());
             serviceLocator.RegisterService<IInputService>(InputService());
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
+            serviceLocator.RegisterService<IScreenService>(new ScreenService());
 
             RegisterGamePrefabFactory();
             RegisterGameUiFactory();
-
-            serviceLocator.RegisterService<IScreenService>(
-                new ScreenService(serviceLocator.LocateService<IGameUIFactory>()));
 
 
             serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(
@@ -70,9 +68,9 @@ namespace GameSM.States
 
         private void RegisterAdsService()
         {
-            var adsService = new AdsService();
+            IAdsService adsService = new AdsService();
             adsService.Initialize();
-            serviceLocator.RegisterService<IAdsService>(adsService);
+            serviceLocator.RegisterService(adsService);
         }
 
         private void RegisterConfigsService()
@@ -103,7 +101,9 @@ namespace GameSM.States
             serviceLocator.RegisterService<IGameUIFactory>(new GameUIFactory(
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IAssetProvider>(),
-                serviceLocator.LocateService<IConfigsService>(), serviceLocator));
+                serviceLocator.LocateService<IConfigsService>(),
+                serviceLocator.LocateService<IScreenService>(),
+                serviceLocator.LocateService<IAdsService>()));
         }
 
         private IInputService InputService()

@@ -5,43 +5,50 @@ using UnityEngine.Advertisements;
 
 namespace Services.Ads
 {
-    public class AdsService : IAdsService, IUnityAdsListener    
+    public class AdsService : IAdsService, IUnityAdsListener
     {
         private const string AndroidGameId = "4422311";
         private const string IosGameId = "4422310";
         private const string RewardedVideoPlacementIdAndroid = "Rewarded_Android";
         private const string RewardedVideoPlacementIdIos = "Rewarded_iOS";
+        
+        private TaskCompletionSource<bool> taskCompletionSource;
 
-        private string gameId;
         private string rewardedPlacementId;
+        private string gameId;
 
         public event Action RewardedVideoReady;
-        private TaskCompletionSource<bool> taskCompletionSource;
+        public int Reward => 100;
+
 
         public void Initialize()
         {
-            switch (Application.platform)
-            {
-                case RuntimePlatform.Android:
-                    gameId = AndroidGameId;
-                    rewardedPlacementId = RewardedVideoPlacementIdAndroid;
-                    break;
-                case RuntimePlatform.IPhonePlayer:
-                    gameId = IosGameId;
-                    rewardedPlacementId = RewardedVideoPlacementIdIos;
-                    break;
-                case RuntimePlatform.WindowsEditor:
-                    gameId = AndroidGameId;
-                    rewardedPlacementId = RewardedVideoPlacementIdAndroid;
-                    break;
-                default:
-                    Debug.Log("Unsupported Platform for Ads");
-                    break;
-            }
-
+            // switch (Application.platform)
+            // {
+            //     case RuntimePlatform.Android:
+            //         gameId = AndroidGameId;
+            //         rewardedPlacementId = RewardedVideoPlacementIdAndroid;
+            //         break;
+            //     case RuntimePlatform.IPhonePlayer:
+            //         gameId = IosGameId;
+            //         rewardedPlacementId = RewardedVideoPlacementIdIos;
+            //         break;
+            //     case RuntimePlatform.WindowsEditor:
+            //         gameId = AndroidGameId;
+            //         rewardedPlacementId = RewardedVideoPlacementIdAndroid;
+            //         break;
+            //     default:
+            //         Debug.Log("Unsupported Platform for Ads");
+            //         break;
+            // }
+            gameId = AndroidGameId;
+            rewardedPlacementId = RewardedVideoPlacementIdAndroid;
             Advertisement.AddListener(this);
             Advertisement.Initialize(gameId);
         }
+
+        public void AddOnRewardedVideoReadyListener(Action listener) => RewardedVideoReady += listener;
+        public void RemoveOnRewardedVideoReadyListener(Action listener) => RewardedVideoReady -= listener;
 
         public Task<bool> ShowRewardedVideo()
         {
