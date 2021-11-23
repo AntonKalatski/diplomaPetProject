@@ -50,6 +50,7 @@ namespace GameSM.States
             RegisterConfigsService();
             RegisterRandomService();
             RegisterAdsService();
+            serviceLocator.RegisterService<IGameStateMachine>(stateMachine);
             serviceLocator.RegisterService<IAssetProvider>(new AssetProvider());
             serviceLocator.RegisterService<CameraService>(new CameraService());
             serviceLocator.RegisterService<IPlayerGameObjectProvider>(new PlayerGameObjectProvider());

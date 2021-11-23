@@ -4,7 +4,6 @@ using Bootstrap;
 using Factories.Interfaces;
 using GameSM.Interfaces;
 using GameSM.States;
-using Services.Configs;
 using Services.Configs.Zombie;
 using Services.GameProgress;
 using Services.GameServiceLocator;
@@ -13,7 +12,7 @@ using UI.Loading;
 
 namespace GameSM
 {
-    public class GameStateMachine
+    public class GameStateMachine : IGameStateMachine
     {
         private readonly ServiceLocator serviceLocator;
         private Dictionary<Type, IExitableState> states;
@@ -40,7 +39,7 @@ namespace GameSM
         public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload> =>
             ChangeState<TState>().Enter(payload);
 
-        private TState ChangeState<TState>() where TState : class, IExitableState
+        public TState ChangeState<TState>() where TState : class, IExitableState
         {
             activeState?.Exit();
 
@@ -50,6 +49,6 @@ namespace GameSM
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState => states[typeof(TState)] as TState;
+        public TState GetState<TState>() where TState : class, IExitableState => states[typeof(TState)] as TState;
     }
 }

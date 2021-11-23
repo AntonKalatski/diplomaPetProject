@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588db2e787c4428f9c65190e64ee5c91, type: 3}
   m_Name: City
   m_EditorClassIdentifier: 
-  LevelKey: Main
+  LevelKey: City
   zombieSpawners:
   - Id: Main_1f8e932f-8c09-42b3-87c0-39b2df7738a5
     zombieType: 0
@@ -32,3 +32,4 @@ MonoBehaviour:
   - Id: Main_d2f6a2fc-a0e5-4ffc-9d3d-76e0ffb74026
     zombieType: 2
     Position: {x: 6.16, y: 0, z: 70.56}
+  InitialHeroPosition: {x: 1.97, y: 0, z: 2.66}

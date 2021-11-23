@@ -8,5 +8,6 @@ namespace Services.Configs.Zombie
     {
         public string LevelKey;
         public List<ZombieSpawnerData> zombieSpawners;
+        public Vector3 InitialHeroPosition;
     }
 }

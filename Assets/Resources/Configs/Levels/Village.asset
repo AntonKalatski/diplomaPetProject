@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588db2e787c4428f9c65190e64ee5c91, type: 3}
+  m_Name: Village
+  m_EditorClassIdentifier: 
+  LevelKey: Village
+  zombieSpawners:
+  - Id: Village_18f0da8b-d43f-4ec7-86a2-54f7c9fe4e7d
+    zombieType: 0
+    Position: {x: -2.06, y: 0, z: 34.26}
+  - Id: Village_924813c8-6bf8-40eb-9fb6-edc9740aa06c
+    zombieType: 0
+    Position: {x: 7.1, y: 0, z: 42.8}
+  - Id: Main_1f8e932f-8c09-42b3-87c0-39b2df7738a5
+    zombieType: 0
+    Position: {x: -5.78, y: 0, z: 46.22}
+  InitialHeroPosition: {x: -0.24, y: 0, z: 7.98}

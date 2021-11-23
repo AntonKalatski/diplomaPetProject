@@ -63,52 +63,59 @@ namespace GameSM.States
 
         private void InitializeGameWorld()
         {
-            InitializeZombieSpawners();
+            var levelData = LevelData();
 
-            var survivor = InitializePlayer();
-            
+            InitializeZombieSpawners(levelData);
+
+            var survivor = InitializePlayer(levelData);
+
             InitializeUiRoot();
             InitializeHud(survivor.GetComponent<IHealth>());
-            
+
             ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
         }
 
-     
 
-        private void InitializeZombieSpawners()
+        private void InitializeZombieSpawners(LevelData levelData)
         {
-            string sceneKey = SceneManager.GetActiveScene().name;
-            LevelData levelData = configsService.ForLevel(sceneKey);
             foreach (var spawner in levelData.zombieSpawners)
                 prefabFactory.CreateZombieSpawner(spawner.Position, spawner.Id, spawner.zombieType);
         }
 
-        private GameObject InitializePlayer()
+        private GameObject InitializePlayer(LevelData levelData)
         {
-            InitializeSpawnPoint();
-            var spawnPoint = gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position.AsUnityVector3();
+            var spawnPoint = InitializeSpawnPoint(levelData);
             GameObject survivor = prefabFactory.CreateSurvivor(spawnPoint);
             return survivor;
         }
+
         private void InitializeUiRoot() => uiFactory.CreateUIRoot();
 
         private void InitializeHud(IHealth playerHealth) =>
             uiFactory.CreateHud().GetComponent<ActorUI>().Initialize(playerHealth);
 
-        private void InitializeSpawnPoint()
+        private Vector3 InitializeSpawnPoint(LevelData levelData)
         {
-            var playerConfig = configsService.ForConfig<PlayerConfig>(ConfigType.PlayerConfig);
+            if (gameProgressService.IsNewGame)
+            {
+                gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position =
+                    levelData.InitialHeroPosition.AsVectorPosition();
+            }
 
-            if (!gameProgressService.IsNewGame)
-                return;
-            gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position =
-                playerConfig.playerSpawnPoint.position.AsVectorPosition();
+            return gameProgressService.PlayerProgressData.worldData.PositionOnLevel.position.AsUnityVector3();
         }
 
         private void InformProgressReaders()
         {
             prefabFactory.ProgressLoadables.ForEach(x => x.LoadProgress(gameProgressService.PlayerProgressData));
             uiFactory.ProgressLoadables.ForEach(x => x.LoadProgress(gameProgressService.PlayerProgressData));
+        }
+
+        private LevelData LevelData()
+        {
+            string sceneKey = SceneManager.GetActiveScene().name;
+            LevelData levelData = configsService.ForLevel(sceneKey);
+            return levelData;
         }
     }
 }

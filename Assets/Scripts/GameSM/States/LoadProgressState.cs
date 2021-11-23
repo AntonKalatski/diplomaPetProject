@@ -38,7 +38,7 @@ namespace GameSM.States
         private PlayerProgressData NewProgress()
         {
             gameProgressService.IsNewGame = true;
-            var progress = new PlayerProgressData(GameConstants.Main);
+            var progress = new PlayerProgressData(GameConstants.City);
             progress.playerState.maxHp = 100;
             progress.playerState.ResetHp();
             progress.playerStats.Damage = 50f;
