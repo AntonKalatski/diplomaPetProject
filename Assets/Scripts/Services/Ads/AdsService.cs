@@ -23,26 +23,24 @@ namespace Services.Ads
 
         public void Initialize()
         {
-            // switch (Application.platform)
-            // {
-            //     case RuntimePlatform.Android:
-            //         gameId = AndroidGameId;
-            //         rewardedPlacementId = RewardedVideoPlacementIdAndroid;
-            //         break;
-            //     case RuntimePlatform.IPhonePlayer:
-            //         gameId = IosGameId;
-            //         rewardedPlacementId = RewardedVideoPlacementIdIos;
-            //         break;
-            //     case RuntimePlatform.WindowsEditor:
-            //         gameId = AndroidGameId;
-            //         rewardedPlacementId = RewardedVideoPlacementIdAndroid;
-            //         break;
-            //     default:
-            //         Debug.Log("Unsupported Platform for Ads");
-            //         break;
-            // }
-            gameId = AndroidGameId;
-            rewardedPlacementId = RewardedVideoPlacementIdAndroid;
+            switch (Application.platform)
+            {
+                case RuntimePlatform.Android:
+                    gameId = AndroidGameId;
+                    rewardedPlacementId = RewardedVideoPlacementIdAndroid;
+                    break;
+                case RuntimePlatform.IPhonePlayer:
+                    gameId = IosGameId;
+                    rewardedPlacementId = RewardedVideoPlacementIdIos;
+                    break;
+                case RuntimePlatform.WindowsEditor:
+                    gameId = AndroidGameId;
+                    rewardedPlacementId = RewardedVideoPlacementIdAndroid;
+                    break;
+                default:
+                    Debug.Log("Unsupported Platform for Ads");
+                    break;
+            }
             Advertisement.AddListener(this);
             Advertisement.Initialize(gameId);
         }

@@ -1,5 +1,4 @@
-﻿using Configs.Container;
-using GameSM.States;
+﻿using GameSM.States;
 using UI.Loading;
 using UnityEngine;
 

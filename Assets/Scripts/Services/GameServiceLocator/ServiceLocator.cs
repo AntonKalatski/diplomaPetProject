@@ -9,7 +9,7 @@
             Implementation<TService>.ServiceInstance = implementation;
 
         public TService LocateService<TService>() where TService : IService => Implementation<TService>.ServiceInstance;
-
+        
         private static class Implementation<TService> where TService : IService
         {
             public static TService ServiceInstance;

@@ -6,8 +6,7 @@ namespace Services.Random
     {
         public bool CalculateChance(float min, float max, float chance)
         {
-            var rnd = UnityEngine.Random.Range(min,max); 
-            Debug.Log($"Random service rnd = {rnd}");
+            var rnd = UnityEngine.Random.Range(min,max);
             return chance <= rnd;
         }
     }
