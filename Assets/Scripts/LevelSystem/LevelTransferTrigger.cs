@@ -13,7 +13,6 @@ namespace LevelSystem
         [SerializeField] private bool triggered = false;
 
         private IGameStateMachine _stateMachine;
-        private BoxCollider coll;
         public string TransferTo => transferTo;
 
         private void Awake()
@@ -32,10 +31,11 @@ namespace LevelSystem
 
         private void OnDrawGizmos()
         {
-            if (ReferenceEquals(coll, null))
-                return;
-            Gizmos.color = new Color32(200, 30, 30, 130);
-            Gizmos.DrawCube(transform.position + coll.center, coll.size);
+            if (!ReferenceEquals(collider, null))
+            {
+                Gizmos.color = new Color32(200, 30, 30, 130);
+                Gizmos.DrawCube(transform.position + collider.center, collider.size);
+            }
         }
     }
 }

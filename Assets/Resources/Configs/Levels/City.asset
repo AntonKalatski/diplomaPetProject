@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: City
   zombieSpawners:
+  - Id: City_36fea0ca-a849-4fc1-8573-875c9ff8e336
+    zombieType: 2
+    Position: {x: 6.38, y: 0, z: 22.21}
   - Id: Main_1f8e932f-8c09-42b3-87c0-39b2df7738a5
     zombieType: 0
     Position: {x: -6.3, y: 0, z: 26.23}

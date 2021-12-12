@@ -21,6 +21,7 @@ namespace Player
         [SerializeField] private float temp;
         private int layerMask;
         private Collider[] hits = new Collider[3];
+        private ZombieDeath zombie1;
 
         public void OnPlayerAttack()
         {
@@ -43,7 +44,15 @@ namespace Player
         {
             if (enemy == null)
                 return;
-            activeEnemy = enemy.transform;
+            zombie1 = enemy.GetComponent<ZombieDeath>();
+            zombie1.AddOnDeathListener(ZombieDeathListener);
+            activeEnemy = zombie1.transform;
+        }
+
+        private void ZombieDeathListener()
+        {
+            zombie1.RemoveOnDeathListener(ZombieDeathListener);
+            transform.GetComponent<PlayerAttack>().enabled = false;
         }
 
         public void SetAttackProperties(float radius, float speed, float damage)
@@ -91,8 +100,7 @@ namespace Player
         private void Attack()
         {
             if (ReferenceEquals(activeEnemy, null))
-                return;
-            Debug.Log($"Trying to llok at {activeEnemy.name}");
+               return;
             transform.LookAt(activeEnemy);
             anim.Attack();
             isAttacking = true;
