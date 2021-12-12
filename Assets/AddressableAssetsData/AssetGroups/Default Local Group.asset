@@ -16,7 +16,31 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 6e765e16cfe4b5d489995281cdb26408
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 60c5b5cac2d9885408de0f044c735f45
+    m_Address: Zombie_Prisoner
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 160776, guid: 60c5b5cac2d9885408de0f044c735f45, type: 3}
+    m_TargetAsset: {fileID: 160776, guid: 60c5b5cac2d9885408de0f044c735f45, type: 3}
+  - m_GUID: 21243d795617ce445b44073bee76c72c
+    m_Address: Zombie_Security
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 160776, guid: 21243d795617ce445b44073bee76c72c, type: 3}
+    m_TargetAsset: {fileID: 160776, guid: 21243d795617ce445b44073bee76c72c, type: 3}
+  - m_GUID: 9172b776598ca90448277d43a7b00e08
+    m_Address: Zombie_Soldier
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 160776, guid: 9172b776598ca90448277d43a7b00e08, type: 3}
+    m_TargetAsset: {fileID: 160776, guid: 9172b776598ca90448277d43a7b00e08, type: 3}
+  - m_GUID: f035ab47a0541a84e839d73a419ff29f
+    m_Address: Zombie_StreetMan
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 160776, guid: f035ab47a0541a84e839d73a419ff29f, type: 3}
+    m_TargetAsset: {fileID: 160776, guid: f035ab47a0541a84e839d73a419ff29f, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4b35ec37e2caebe48ba340b8f93fc772, type: 2}
   m_SchemaSet:

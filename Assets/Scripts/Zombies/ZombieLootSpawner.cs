@@ -33,6 +33,7 @@ namespace Zombies
 
         private void InitializeLootBehaviour()
         {
+            //todo make new loot item 
             var loot = prefabFactory.CreateLoot(lootToSpawn);
             loot.transform.position = transform.position;
             loot.Initialize(new LootItem()

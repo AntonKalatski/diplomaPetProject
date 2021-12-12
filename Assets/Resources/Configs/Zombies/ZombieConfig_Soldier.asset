@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d00c9bf2425874393a0cf9db8f400f, type: 3}
   m_Name: ZombieConfig_Soldier
   m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 160776, guid: 9172b776598ca90448277d43a7b00e08, type: 3}
+  prefabReference:
+    m_AssetGUID: 9172b776598ca90448277d43a7b00e08
+    m_SubObjectName: 
+    m_SubObjectType: 
   zombieType: 2
   attackCoolDown: 2
   attackRadius: 1.5

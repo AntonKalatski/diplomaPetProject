@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Village
   zombieSpawners:
-  - Id: Village_18f0da8b-d43f-4ec7-86a2-54f7c9fe4e7d
+  - Id: Village_dc62eaae-b091-4529-a5a7-e5f28d61142a
     zombieType: 0
-    Position: {x: -2.06, y: 0, z: 34.26}
+    Position: {x: -5.3, y: 0, z: 46.1}
   - Id: Village_924813c8-6bf8-40eb-9fb6-edc9740aa06c
     zombieType: 0
     Position: {x: 7.1, y: 0, z: 42.8}
-  - Id: Main_1f8e932f-8c09-42b3-87c0-39b2df7738a5
+  - Id: Village_18f0da8b-d43f-4ec7-86a2-54f7c9fe4e7d
     zombieType: 0
-    Position: {x: -5.78, y: 0, z: 46.22}
+    Position: {x: -2.06, y: 0, z: 34.26}
   InitialHeroPosition: {x: -0.24, y: 0, z: 7.98}

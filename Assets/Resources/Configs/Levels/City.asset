@@ -14,25 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: City
   zombieSpawners:
+  - Id: City_066ef0f1-6d0d-4e8d-aa93-85d4c00b3006
+    zombieType: 0
+    Position: {x: -6.8, y: 0, z: 56}
+  - Id: City_6b769aa8-7aae-488f-a7ad-155ec43d86a0
+    zombieType: 0
+    Position: {x: 6.3, y: 0, z: 63.8}
+  - Id: City_99f9be2e-7b76-4aa9-9735-d2219241115f
+    zombieType: 0
+    Position: {x: 11.5, y: 0, z: 57}
+  - Id: City_abb92a9c-0ce3-4ddc-bde1-b8f3ff2d97e4
+    zombieType: 0
+    Position: {x: 5.3, y: 0, z: 49.1}
   - Id: City_36fea0ca-a849-4fc1-8573-875c9ff8e336
     zombieType: 2
-    Position: {x: 6.38, y: 0, z: 22.21}
-  - Id: Main_1f8e932f-8c09-42b3-87c0-39b2df7738a5
-    zombieType: 0
-    Position: {x: -6.3, y: 0, z: 26.23}
-  - Id: Main_7de37898-f909-4e2b-875d-485f6e69a6d7
-    zombieType: 2
-    Position: {x: 13.01, y: 0, z: 44.16}
-  - Id: Main_760582ca-e9c6-40b1-932d-b58728531940
-    zombieType: 3
-    Position: {x: 5.74, y: 0, z: 56.45}
-  - Id: Main_0bdcc8cb-b43f-4f98-94c8-a796db029eda
-    zombieType: 3
-    Position: {x: 14.68, y: 0, z: 66.03}
-  - Id: Main_dc81ef3c-2c08-489d-b3a2-27d2bac2bbe4
-    zombieType: 1
-    Position: {x: -3.21, y: 0, z: 47.97}
-  - Id: Main_d2f6a2fc-a0e5-4ffc-9d3d-76e0ffb74026
-    zombieType: 2
-    Position: {x: 6.16, y: 0, z: 70.56}
+    Position: {x: 0.33, y: 0, z: 26.52}
   InitialHeroPosition: {x: 1.97, y: 0, z: 2.66}

@@ -1,4 +1,5 @@
-﻿using Behaviours.Loot;
+﻿using System.Threading.Tasks;
+using Behaviours.Loot;
 using Configs.LootConfig;
 using Constants;
 using Factories.Interfaces;
@@ -43,10 +44,13 @@ namespace Factories
             return player;
         }
 
-        public GameObject CreateZombie(ZombieType type, Transform parent)
+        public async Task<GameObject> CreateZombie(ZombieType type, Transform parent)
         {
+            //todo make 1 method to load any prefab reference 
             var zombieConfig = configsService.ForZombie(type);
-            var zombie = Object.Instantiate(zombieConfig.ZombiePrefab, parent);
+            GameObject prefab = await assetProvider.Load<GameObject>(zombieConfig.PrefabReference);
+
+            var zombie = Object.Instantiate(prefab, parent);
             var zombieHealth = zombie.GetComponent<IHealth>();
             zombieHealth.CurrentHealth = zombieConfig.Hp;
             zombieHealth.MaxHealth = zombieConfig.Hp;
@@ -84,6 +88,12 @@ namespace Factories
             spawner.Construct(this);
             spawner.Id = id;
             spawner.type = zombieType;
+        }
+
+        public override void CleanUp()
+        {
+            base.CleanUp();
+            assetProvider.CleanUp();
         }
     }
 }

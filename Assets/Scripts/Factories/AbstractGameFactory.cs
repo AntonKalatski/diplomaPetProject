@@ -22,7 +22,7 @@ namespace Factories
             RegisterProgressLoaders(gameObject);
         }
 
-        public void CleanUp()
+        public virtual void CleanUp()
         {
             ProgressLoadables.Clear();
             ProgressSaveables.Clear();

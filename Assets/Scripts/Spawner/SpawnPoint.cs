@@ -1,4 +1,5 @@
-﻿using Factories.Interfaces;
+﻿using System.Threading.Tasks;
+using Factories.Interfaces;
 using GameData;
 using Player;
 using Services.GameServiceLocator;
@@ -35,10 +36,10 @@ namespace Spawner
                 Spawn();
         }
 
-        private void Spawn()
+        private async void Spawn()
         {
             Debug.Log("Try to spawn zombie");
-            var zombie = factory.CreateZombie(type, transform);
+            var zombie = await factory.CreateZombie(type, transform);
             zombieDeath = zombie.GetComponent<ZombieDeath>();
             zombieDeath.AddOnDeathListener(ZombieDeathHandler);
         }
