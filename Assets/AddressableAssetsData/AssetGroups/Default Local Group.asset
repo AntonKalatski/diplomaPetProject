@@ -41,6 +41,36 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 160776, guid: f035ab47a0541a84e839d73a419ff29f, type: 3}
     m_TargetAsset: {fileID: 160776, guid: f035ab47a0541a84e839d73a419ff29f, type: 3}
+  - m_GUID: f344b7f2d0426604599821e9d21babff
+    m_Address: MedKit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 120558, guid: f344b7f2d0426604599821e9d21babff, type: 3}
+    m_TargetAsset: {fileID: 120558, guid: f344b7f2d0426604599821e9d21babff, type: 3}
+  - m_GUID: 2f03df714bfaa8947a1420718042084b
+    m_Address: SpawnPoint
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 7235089409029982017, guid: 2f03df714bfaa8947a1420718042084b, type: 3}
+    m_TargetAsset: {fileID: 7235089409029982017, guid: 2f03df714bfaa8947a1420718042084b, type: 3}
+  - m_GUID: 460f9e46e9a3c094a874c7b9670dc789
+    m_Address: Female_Survivor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 102266, guid: 460f9e46e9a3c094a874c7b9670dc789, type: 3}
+    m_TargetAsset: {fileID: 102266, guid: 460f9e46e9a3c094a874c7b9670dc789, type: 3}
+  - m_GUID: 5ec10a96d2aca5b42aec6265d337ac2b
+    m_Address: Hud
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 6445442814630087182, guid: 5ec10a96d2aca5b42aec6265d337ac2b, type: 3}
+    m_TargetAsset: {fileID: 6445442814630087182, guid: 5ec10a96d2aca5b42aec6265d337ac2b, type: 3}
+  - m_GUID: 04258020e4f4d5b4ab2c04bc18300ad9
+    m_Address: UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2969302070231241560, guid: 04258020e4f4d5b4ab2c04bc18300ad9, type: 3}
+    m_TargetAsset: {fileID: 2969302070231241560, guid: 04258020e4f4d5b4ab2c04bc18300ad9, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4b35ec37e2caebe48ba340b8f93fc772, type: 2}
   m_SchemaSet:

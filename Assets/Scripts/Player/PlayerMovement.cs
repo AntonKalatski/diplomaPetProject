@@ -16,24 +16,28 @@ namespace Player
         [SerializeField] private Rigidbody rb;
         [SerializeField, Range(0, 10)] private float movementSpeed;
 
-        private IInputService inputService;
-        private Camera mainCam;
+        private IInputService _inputService;
+        private ICameraService _cameraService;
 
-        private void Awake() => characterController ??= GetComponent<CharacterController>();
-
-        private void Start()
+        public PlayerMovement(IInputService inputService)
         {
-            inputService = ServiceLocator.Container.LocateService<IInputService>();
-            mainCam = ServiceLocator.Container.LocateService<CameraService>().GetCamera();
+            _inputService = inputService;
+        }
+
+        public void Construct(ICameraService camera, IInputService input)
+        {
+            characterController ??= GetComponent<CharacterController>();
+            _inputService = input;
+            _cameraService = camera;
         }
 
         private void Update()
         {
             Vector3 direction = Vector3.zero;
 
-            if (inputService.Axis.sqrMagnitude > GameConstants.Epsilon)
+            if (_inputService.Axis.sqrMagnitude > GameConstants.Epsilon)
             {
-                direction = mainCam.transform.TransformDirection(inputService.Axis).normalized;
+                direction = _cameraService.GetCamera().transform.TransformDirection(_inputService.Axis).normalized;
                 direction.y = 0;
                 transform.forward = direction;
             }
@@ -69,5 +73,7 @@ namespace Player
         }
 
         private static string GetSceneName() => SceneManager.GetActiveScene().name;
+
+        
     }
 }

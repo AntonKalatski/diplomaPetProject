@@ -31,10 +31,10 @@ namespace Zombies
             InitializeLootBehaviour();
         }
 
-        private void InitializeLootBehaviour()
+        private async void InitializeLootBehaviour()
         {
             //todo make new loot item 
-            var loot = prefabFactory.CreateLoot(lootToSpawn);
+            var loot = await prefabFactory.CreateLoot(lootToSpawn);
             loot.transform.position = transform.position;
             loot.Initialize(new LootItem()
             {

@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Factories.Interfaces
 {
     public interface IGameUIFactory : IGameFactory
     {
         void CreateUIRoot();
-        GameObject CreateHud();
+        Task<GameObject> CreateHud();
         void CreateShop();
+        Task WarmUp();
     }
 }

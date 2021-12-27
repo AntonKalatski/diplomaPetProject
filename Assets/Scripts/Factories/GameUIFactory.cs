@@ -1,10 +1,10 @@
-﻿using Constants;
+﻿using System.Threading.Tasks;
+using Constants;
 using Factories.Interfaces;
 using Providers.Assets;
 using Services.Ads;
 using Services.Configs.Zombie;
 using Services.GameProgress;
-using Services.GameServiceLocator;
 using UI.Bars;
 using UI.Elements;
 using UI.Screens.Shop;
@@ -19,7 +19,9 @@ namespace Factories
         private readonly IGameProgressService progressService;
         private readonly IConfigsService configsService;
         private readonly IScreenService screenService;
+
         private readonly IAdsService adsService;
+
         private Transform uiRoot;
 
         public GameUIFactory(IGameProgressService progressService, IAssetProvider assetProvider,
@@ -31,11 +33,21 @@ namespace Factories
             this.adsService = adsService;
         }
 
-        public void CreateUIRoot() => uiRoot = Instantiate(AssetsPath.UIRoot).transform;
-
-        public GameObject CreateHud()
+        public async Task WarmUp()
         {
-            GameObject hud = InstantiateRegistered(AssetsPath.Hud);
+            await assetProvider.Load<GameObject>(AssetsAdresses.UIRoot);
+            await assetProvider.Load<GameObject>(AssetsAdresses.Hud);
+        }
+
+        public async void CreateUIRoot()
+        {
+            var prefab = await Instantiate(AssetsAdresses.UIRoot);
+            uiRoot = prefab.transform;
+        }
+
+        public async Task<GameObject> CreateHud()
+        {
+            GameObject hud = await InstantiateRegisteredAsync(AssetsAdresses.Hud);
             hud.GetComponentInChildren<KillCounterBar>().Construct(progressService.PlayerProgressData);
             foreach (var button in hud.GetComponentsInChildren<OpenScreenButton>())
                 button.Construct(screenService);

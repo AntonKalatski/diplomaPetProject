@@ -13,9 +13,8 @@ namespace UI.Bars
         {
             killData = progressData.killData;
             killData.AddKillCounterListener(KillCounterHandler);
+            KillCounterHandler();
         }
-
-        private void Start() => KillCounterHandler();
 
         private void KillCounterHandler() => counter.text = killData.killedZombies.ToString();
 

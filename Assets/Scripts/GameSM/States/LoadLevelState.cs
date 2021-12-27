@@ -1,6 +1,6 @@
-﻿using Bootstrap;
-using Configs;
-using Configs.Player;
+﻿using System;
+using System.Threading.Tasks;
+using Bootstrap;
 using Extensions;
 using Factories.Interfaces;
 using GameElements.Health;
@@ -49,30 +49,40 @@ namespace GameSM.States
             curtain.Show();
             prefabFactory.CleanUp();
             uiFactory.CleanUp();
+
+           // prefabFactory.WarmUp();
+            //uiFactory.WarmUp();
             sceneLoader.Load(payload, onLoaded: OnLevelLoaded);
         }
 
         public void Exit() => curtain.Show();
 
-        private void OnLevelLoaded()
+        private async void OnLevelLoaded()
         {
-            InitializeGameWorld();
+            await InitializeGameWorld();
             InformProgressReaders();
             gameStateMachine.Enter<GameLoopState>();
         }
 
-        private void InitializeGameWorld()
+        private async Task InitializeGameWorld()
         {
             var levelData = LevelData();
 
             InitializeZombieSpawners(levelData);
 
-            var survivor = InitializePlayer(levelData);
-
+            var survivor = await InitializePlayer(levelData);
+            
             InitializeUiRoot();
-            InitializeHud(survivor.GetComponent<IHealth>());
-
+            await InitializeHud(survivor.GetComponent<IHealth>());
+            
             ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
+        }
+
+        private async Task<GameObject> InitializePlayer(LevelData levelData)
+        {
+            var spawnPoint = InitializeSpawnPoint(levelData);
+            GameObject survivor = await prefabFactory.CreateSurvivor(spawnPoint);
+            return survivor;
         }
 
 
@@ -82,17 +92,13 @@ namespace GameSM.States
                 prefabFactory.CreateZombieSpawner(spawner.Position, spawner.Id, spawner.zombieType);
         }
 
-        private GameObject InitializePlayer(LevelData levelData)
-        {
-            var spawnPoint = InitializeSpawnPoint(levelData);
-            GameObject survivor = prefabFactory.CreateSurvivor(spawnPoint);
-            return survivor;
-        }
-
         private void InitializeUiRoot() => uiFactory.CreateUIRoot();
 
-        private void InitializeHud(IHealth playerHealth) =>
-            uiFactory.CreateHud().GetComponent<ActorUI>().Initialize(playerHealth);
+        private async Task InitializeHud(IHealth playerHealth)
+        {
+            var hud = await uiFactory.CreateHud();
+            hud.GetComponent<ActorUI>().Initialize(playerHealth);
+        }
 
         private Vector3 InitializeSpawnPoint(LevelData levelData)
         {

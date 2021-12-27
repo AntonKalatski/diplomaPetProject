@@ -6,7 +6,6 @@ using GameSM.Interfaces;
 using Providers.Assets;
 using Services;
 using Services.Ads;
-using Services.Configs;
 using Services.Configs.Zombie;
 using Services.GameCamera;
 using Services.GameInput;
@@ -50,8 +49,8 @@ namespace GameSM.States
             RegisterConfigsService();
             RegisterRandomService();
             RegisterAdsService();
+            RegisterAssetProvider();
             serviceLocator.RegisterService<IGameStateMachine>(stateMachine);
-            serviceLocator.RegisterService<IAssetProvider>(new AssetProvider());
             serviceLocator.RegisterService<CameraService>(new CameraService());
             serviceLocator.RegisterService<IPlayerGameObjectProvider>(new PlayerGameObjectProvider());
             serviceLocator.RegisterService<IInputService>(InputService());
@@ -65,6 +64,13 @@ namespace GameSM.States
             serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));
+        }
+
+        private void RegisterAssetProvider()
+        {
+            var assetProvider = new AssetProvider();
+            assetProvider.InitializeAsync();
+            serviceLocator.RegisterService<IAssetProvider>(assetProvider);
         }
 
         private void RegisterAdsService()

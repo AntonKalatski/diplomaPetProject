@@ -1,11 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Behaviours.Loot;
 using Configs.LootConfig;
+using Configs.Zombie;
 using Constants;
 using Factories.Interfaces;
 using GameElements.Health;
+using Player;
 using Providers.Assets;
+using Services;
 using Services.Configs.Zombie;
+using Services.GameCamera;
 using Services.GameProgress;
 using Services.GameServiceLocator;
 using Services.Player;
@@ -14,6 +19,7 @@ using Spawner;
 using UI.Actors;
 using UnityEngine;
 using Zombies;
+using Object = UnityEngine.Object;
 
 namespace Factories
 {
@@ -37,21 +43,32 @@ namespace Factories
             this.gameProgressService = gameProgressService;
         }
 
-        public GameObject CreateSurvivor(Vector3 atPoint)
+        public async Task<GameObject> CreateSurvivor(Vector3 atPoint)
         {
-            var player = InstantiateRegistered(AssetsPath.FemaleSurvivor, atPoint);
+            var prefab = await assetProvider.Load<GameObject>(AssetsAdresses.FemaleSurvivor);
+            var player = InstantiateRegisteredAsync(prefab, atPoint);
+            var inputService = ServiceLocator.Container.LocateService<IInputService>();
+            var cameraService = ServiceLocator.Container.LocateService<CameraService>();
+            player.GetComponent<PlayerMovement>().Construct(cameraService, inputService);
             playerGOService.SetPlayerGameObject(player);
             return player;
+        }
+
+        public async Task WarmUp()
+        {
+            await assetProvider.Load<GameObject>(AssetsAdresses.FemaleSurvivor);
+            await assetProvider.Load<GameObject>(AssetsAdresses.Spawner);
+            await assetProvider.Load<GameObject>(AssetsAdresses.MedKit);
         }
 
         public async Task<GameObject> CreateZombie(ZombieType type, Transform parent)
         {
             //todo make 1 method to load any prefab reference 
-            var zombieConfig = configsService.ForZombie(type);
+            ZombieConfig zombieConfig = configsService.ForZombie(type);
             GameObject prefab = await assetProvider.Load<GameObject>(zombieConfig.PrefabReference);
 
-            var zombie = Object.Instantiate(prefab, parent);
-            var zombieHealth = zombie.GetComponent<IHealth>();
+            GameObject zombie = Object.Instantiate(prefab, parent);
+            IHealth zombieHealth = zombie.GetComponent<IHealth>();
             zombieHealth.CurrentHealth = zombieConfig.Hp;
             zombieHealth.MaxHealth = zombieConfig.Hp;
             zombie.GetComponent<ActorUI>().Initialize(zombieHealth);
@@ -62,9 +79,6 @@ namespace Factories
             TryInitializeZombieLootSpawner(zombie);
 
             return zombie;
-
-            //todo rework for resourses load unload
-            // return Instantiate(AssetsPath.RandomValue<string>(AssetsPath.ZomibesList),parent);
         }
 
         private void TryInitializeZombieLootSpawner(GameObject zombie)
@@ -73,18 +87,34 @@ namespace Factories
                 ?.ConstructMethod(ServiceLocator.Container.LocateService<IGamePrefabFactory>(), randomService);
         }
 
-        public LootBehaviour CreateLoot(LootType type)
+        public async Task<LootBehaviour> CreateLoot(LootType type)
         {
-            var loot = Object.Instantiate(configsService.ForLoot(type).LootObject);
+            GameObject prefab = null;
+            switch (type)
+            {
+                case LootType.MedicalPack:
+                    prefab = await assetProvider.Load<GameObject>(AssetsAdresses.MedKit);
+                    break;
+                case LootType.Grenade:
+                    break;
+                case LootType.FlashGrenade:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+
+            var loot = Object.Instantiate(prefab);
             Register(loot);
             var lootBehaviour = loot.GetComponent<LootBehaviour>();
             lootBehaviour.Construct(gameProgressService.PlayerProgressData);
             return lootBehaviour;
         }
 
-        public void CreateZombieSpawner(Vector3 at, string id, ZombieType zombieType)
+        public async void CreateZombieSpawner(Vector3 at, string id, ZombieType zombieType)
         {
-            SpawnPoint spawner = InstantiateRegistered(AssetsPath.Spawner, at).GetComponent<SpawnPoint>();
+            var prefab = await assetProvider.Load<GameObject>(AssetsAdresses.Spawner);
+            SpawnPoint spawner = InstantiateRegisteredAsync(prefab, at).GetComponent<SpawnPoint>();
+
             spawner.Construct(this);
             spawner.Id = id;
             spawner.type = zombieType;

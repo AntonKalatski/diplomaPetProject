@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Factories.Interfaces;
 using Player;
 using Providers.Assets;
@@ -27,18 +28,28 @@ namespace Factories
             ProgressLoadables.Clear();
             ProgressSaveables.Clear();
         }
-        protected GameObject Instantiate(string prefabPath) => assetProvider.Instantiate(prefabPath);
-
-        protected GameObject InstantiateRegistered(string prefabPath)
+        protected async Task<GameObject> Instantiate(string prefabPath)
         {
-            GameObject gameObject = assetProvider.Instantiate(prefabPath);
+            return await assetProvider.Instantiate(prefabPath);
+        }
+
+        protected async Task<GameObject> InstantiateRegisteredAsync(string prefabPath)
+        {
+            GameObject gameObject = await assetProvider.Instantiate(prefabPath);
             RegisterProgressLoaders(gameObject);
             return gameObject;
         }
 
-        protected GameObject InstantiateRegistered(string prefabPath, Vector3 at)
+        protected async Task<GameObject> InstantiateRegisteredAsync(string prefabPath, Vector3 at)
         {
-            GameObject gameObject = assetProvider.Instantiate(prefabPath, position: at);
+            GameObject gameObject = await assetProvider.Instantiate(prefabPath, position: at);
+            RegisterProgressLoaders(gameObject);
+            return gameObject;
+        }
+
+        protected GameObject InstantiateRegisteredAsync(GameObject prefab, Vector3 at)
+        {
+            GameObject gameObject = Object.Instantiate(prefab,at,Quaternion.identity);
             RegisterProgressLoaders(gameObject);
             return gameObject;
         }

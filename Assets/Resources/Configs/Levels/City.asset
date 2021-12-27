@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: City
   zombieSpawners:
+  - Id: City_6b769aa8-7aae-488f-a7ad-155ec43d86a0
+    zombieType: 3
+    Position: {x: 6.3, y: 0, z: 63.8}
   - Id: City_066ef0f1-6d0d-4e8d-aa93-85d4c00b3006
     zombieType: 0
     Position: {x: -6.8, y: 0, z: 56}
-  - Id: City_6b769aa8-7aae-488f-a7ad-155ec43d86a0
-    zombieType: 0
-    Position: {x: 6.3, y: 0, z: 63.8}
-  - Id: City_99f9be2e-7b76-4aa9-9735-d2219241115f
-    zombieType: 0
-    Position: {x: 11.5, y: 0, z: 57}
   - Id: City_abb92a9c-0ce3-4ddc-bde1-b8f3ff2d97e4
     zombieType: 0
     Position: {x: 5.3, y: 0, z: 49.1}
+  - Id: City_99f9be2e-7b76-4aa9-9735-d2219241115f
+    zombieType: 1
+    Position: {x: 11.5, y: 0, z: 57}
   - Id: City_36fea0ca-a849-4fc1-8573-875c9ff8e336
     zombieType: 2
     Position: {x: 0.33, y: 0, z: 26.52}

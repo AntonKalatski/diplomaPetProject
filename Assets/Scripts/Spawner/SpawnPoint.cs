@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-using Factories.Interfaces;
+﻿using Factories.Interfaces;
 using GameData;
 using Player;
-using Services.GameServiceLocator;
 using UnityEngine;
 using Zombies;
 
