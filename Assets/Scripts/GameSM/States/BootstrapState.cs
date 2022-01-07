@@ -11,6 +11,7 @@ using Services.GameCamera;
 using Services.GameInput;
 using Services.GameProgress;
 using Services.GameServiceLocator;
+using Services.IAp;
 using Services.Player;
 using Services.Random;
 using Services.SaveLoad;
@@ -56,6 +57,7 @@ namespace GameSM.States
             serviceLocator.RegisterService<IInputService>(InputService());
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
             serviceLocator.RegisterService<IScreenService>(new ScreenService());
+            RegisterInAppService(new InAppProvider(),serviceLocator.LocateService<IGameProgressService>());
 
             RegisterGamePrefabFactory();
             RegisterGameUiFactory();
@@ -78,6 +80,12 @@ namespace GameSM.States
             IAdsService adsService = new AdsService();
             adsService.Initialize();
             serviceLocator.RegisterService(adsService);
+        }
+        private void RegisterInAppService(InAppProvider inAppProvider, IGameProgressService progressService)
+        {
+            InAppService inAppService = new InAppService(inAppProvider, progressService);
+            inAppService.Initialize();
+            serviceLocator.RegisterService<IInAppService>(inAppService);
         }
 
         private void RegisterConfigsService()
@@ -110,7 +118,8 @@ namespace GameSM.States
                 serviceLocator.LocateService<IAssetProvider>(),
                 serviceLocator.LocateService<IConfigsService>(),
                 serviceLocator.LocateService<IScreenService>(),
-                serviceLocator.LocateService<IAdsService>()));
+                serviceLocator.LocateService<IAdsService>(),
+                serviceLocator.LocateService<IInAppService>()));
         }
 
         private IInputService InputService()

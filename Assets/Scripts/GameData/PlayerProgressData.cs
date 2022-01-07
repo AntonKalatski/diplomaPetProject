@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace GameData
 {
@@ -10,6 +11,7 @@ namespace GameData
         public PlayerStats playerStats;
         public KillData killData;
         public LootData lootData;
+        public PurchaseData purchaseData;
 
         public PlayerProgressData(string initialLevel)
         {
@@ -18,6 +20,7 @@ namespace GameData
             playerStats = new PlayerStats();
             killData = new KillData();
             lootData = new LootData();
+            purchaseData = new PurchaseData();
         }
 
     }

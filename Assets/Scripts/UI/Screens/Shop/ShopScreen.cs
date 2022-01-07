@@ -1,5 +1,7 @@
-﻿using Services.Ads;
+﻿using Providers.Assets;
+using Services.Ads;
 using Services.GameProgress;
+using Services.IAp;
 using TMPro;
 using UnityEngine;
 
@@ -9,22 +11,30 @@ namespace UI.Screens.Shop
     {
         [SerializeField] private RewardedAdItem adItem;
         [SerializeField] private TMP_Text killCounter;
+        [SerializeField] private ShopItemsContainer shopItems;
 
-        public void Construct(IAdsService adsService, IGameProgressService progressService)
+        public void Construct(
+            IAdsService adsService,
+            IGameProgressService progressService,
+            IInAppService inAppService,
+            IAssetProvider assetProvider)
         {
             base.Construct(progressService);
-            adItem.Construct(adsService,progressService);
+            adItem.Construct(adsService, progressService);
+            shopItems.Construct(inAppService, progressService, assetProvider);
         }
 
         protected override void Initialize()
         {
             adItem.Initialize();
+            shopItems.Initialize();
             RefreshKillCount();
         }
 
         protected override void SubscribeUpdates()
         {
             adItem.Subscribe();
+            shopItems.Subscribe();
             Progress.killData.AddKillCounterListener(RefreshKillCount);
         }
 
@@ -32,6 +42,7 @@ namespace UI.Screens.Shop
         {
             base.UnsubscribeUpdates();
             adItem.CleanUp();
+            shopItems.CleanUp();
             Progress.killData.RemoveKillCounterListener(RefreshKillCount);
         }
 
