@@ -8,7 +8,6 @@ namespace UI.Actors
     {
         [SerializeField] private HpBar hpBar;
         private IHealth health;
-
         public void Initialize(IHealth playerHealth)
         {
             health = playerHealth;

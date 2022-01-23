@@ -9894,7 +9894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1541556386334502218, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: type
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2854925730560243739, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: m_Name
@@ -10254,7 +10254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1541556386334502218, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: type
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2854925730560243739, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: m_Name
@@ -33840,6 +33840,10 @@ PrefabInstance:
       propertyPath: spawnerId
       value: City_abb92a9c-0ce3-4ddc-bde1-b8f3ff2d97e4
       objectReference: {fileID: 0}
+    - target: {fileID: 1541556386334502218, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2854925730560243739, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: m_Name
       value: SpawnMarker (1)
@@ -34818,6 +34822,10 @@ PrefabInstance:
     - target: {fileID: 748657407140692008, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: spawnerId
       value: City_066ef0f1-6d0d-4e8d-aa93-85d4c00b3006
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541556386334502218, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
+      propertyPath: type
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2854925730560243739, guid: 1c78d6861af1cda48a33ede1a6b065bf, type: 3}
       propertyPath: m_Name

@@ -13,6 +13,7 @@ namespace Spawner
         public string Id { get; set; }
         private IGamePrefabFactory factory;
         private ZombieDeath zombieDeath;
+        private GameObject zombie;
 
         public void Construct(IGamePrefabFactory factory) => this.factory = factory;
 
@@ -37,7 +38,7 @@ namespace Spawner
         private async void Spawn()
         {
             Debug.Log("Try to spawn zombie");
-            var zombie = await factory.CreateZombie(type, transform);
+           zombie = await factory.CreateZombie(type, transform);
             zombieDeath = zombie.GetComponent<ZombieDeath>();
             zombieDeath.AddOnDeathListener(ZombieDeathHandler);
         }
@@ -48,6 +49,7 @@ namespace Spawner
             if (!ReferenceEquals(zombieDeath, null))
                 zombieDeath.RemoveOnDeathListener(ZombieDeathHandler);
             isSlained = true;
+            factory.ZombieDeath(type,zombie);
         }
     }
 }

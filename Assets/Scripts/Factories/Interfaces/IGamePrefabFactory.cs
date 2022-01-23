@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Behaviours.Loot;
 using Configs.LootConfig;
+using Cysharp.Threading.Tasks;
 using Spawner;
 using UnityEngine;
 
@@ -13,5 +14,6 @@ namespace Factories.Interfaces
         Task<LootBehaviour> CreateLoot(LootType type);
         Task<GameObject> CreateZombie(ZombieType zombieType, Transform parent);
         void CreateZombieSpawner(Vector3 at, string id, ZombieType spawnerId);
+        UniTask ZombieDeath(ZombieType type, GameObject zombie);
     }
 }

@@ -12,6 +12,11 @@ namespace UI.Loading
             DontDestroyOnLoad(this);
         }
 
+        public void Initialize()
+        {
+            //todo make addressables full control over this resource
+        }
+
         public void Show()
         {
             gameObject.SetActive(true);

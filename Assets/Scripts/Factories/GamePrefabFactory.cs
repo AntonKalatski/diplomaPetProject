@@ -4,6 +4,7 @@ using Behaviours.Loot;
 using Configs.LootConfig;
 using Configs.Zombie;
 using Constants;
+using Cysharp.Threading.Tasks;
 using Factories.Interfaces;
 using GameElements.Health;
 using Player;
@@ -65,17 +66,19 @@ namespace Factories
         {
             //todo make 1 method to load any prefab reference 
             ZombieConfig zombieConfig = configsService.ForZombie(type);
-            GameObject prefab = await assetProvider.Load<GameObject>(zombieConfig.PrefabReference);
+            //GameObject prefab = await assetProvider.Load<GameObject>(zombieConfig.PrefabReference);
 
-            GameObject zombie = Object.Instantiate(prefab, parent);
+            var container = await assetProvider.GetAssetContainer<GameObject>(zombieConfig.PrefabReference);
+            var zombie = await container.CreateInstance(parent);
+
             IHealth zombieHealth = zombie.GetComponent<IHealth>();
             zombieHealth.CurrentHealth = zombieConfig.Hp;
             zombieHealth.MaxHealth = zombieConfig.Hp;
             zombie.GetComponent<ActorUI>().Initialize(zombieHealth);
             zombie.GetComponent<ZombieAttack>().Initialize(playerGOService.PlayerGameObject);
             zombie.GetComponent<ZombieFollow>().Initialize(playerGOService.PlayerGameObject);
-            zombie.GetComponent<ZombieDeath>().Initialize(gameProgressService.PlayerProgressData);
-
+            var death = zombie.GetComponent<ZombieDeath>();
+            death.Initialize(gameProgressService.PlayerProgressData);
             TryInitializeZombieLootSpawner(zombie);
 
             return zombie;
@@ -120,10 +123,12 @@ namespace Factories
             spawner.type = zombieType;
         }
 
-        public override void CleanUp()
+        public async UniTask ZombieDeath(ZombieType type, GameObject zombie)
         {
-            base.CleanUp();
-            assetProvider.CleanUp();
+            Debug.Log("Zomibe death handler in game prefab factory");
+            ZombieConfig zombieConfig = configsService.ForZombie(type);
+            var container = await assetProvider.GetAssetContainer<GameObject>(zombieConfig.PrefabReference);
+            container.ReleaseInstance(zombie);
         }
     }
 }

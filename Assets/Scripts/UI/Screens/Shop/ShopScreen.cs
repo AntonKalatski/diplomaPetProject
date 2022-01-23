@@ -1,7 +1,7 @@
 ﻿using Providers.Assets;
 using Services.Ads;
 using Services.GameProgress;
-using Services.IAp;
+//using Services.IAp;
 using TMPro;
 using UnityEngine;
 
@@ -16,12 +16,12 @@ namespace UI.Screens.Shop
         public void Construct(
             IAdsService adsService,
             IGameProgressService progressService,
-            IInAppService inAppService,
+            //IInAppService inAppService,
             IAssetProvider assetProvider)
         {
             base.Construct(progressService);
             adItem.Construct(adsService, progressService);
-            shopItems.Construct(inAppService, progressService, assetProvider);
+            shopItems.Construct(progressService, assetProvider);
         }
 
         protected override void Initialize()

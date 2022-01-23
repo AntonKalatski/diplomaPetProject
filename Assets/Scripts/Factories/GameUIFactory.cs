@@ -5,7 +5,6 @@ using Providers.Assets;
 using Services.Ads;
 using Services.Configs.Zombie;
 using Services.GameProgress;
-using Services.IAp;
 using UI.Bars;
 using UI.Elements;
 using UI.Screens.Shop;
@@ -16,7 +15,7 @@ namespace Factories
 {
     public class GameUIFactory : AbstractGameFactory, IGameUIFactory
     {
-        private const string UIRootPath = "UI/UIRoot/UIRoot";
+        // private const string UIRootPath = "UI/UIRoot/UIRoot";
         private readonly IGameProgressService progressService;
         private readonly IConfigsService configsService;
         private readonly IScreenService screenService;
@@ -24,16 +23,14 @@ namespace Factories
         private readonly IAdsService adsService;
 
         private Transform uiRoot;
-        private IInAppService inAppService;
 
         public GameUIFactory(IGameProgressService progressService, IAssetProvider assetProvider,
-            IConfigsService configsService, IScreenService screenService, IAdsService adsService, IInAppService inAppService) : base(assetProvider)
+            IConfigsService configsService, IScreenService screenService, IAdsService adsService) : base(assetProvider)
         {
             this.progressService = progressService;
             this.configsService = configsService;
             this.screenService = screenService;
             this.adsService = adsService;
-            this.inAppService = inAppService;
         }
 
         public async Task WarmUp()
@@ -60,9 +57,9 @@ namespace Factories
 
         public void CreateShop()
         {
-            var windowConfig = configsService.ForScreen(ScreenType.Shop);
-            ShopScreen shopWindow = Object.Instantiate(windowConfig.prefab, uiRoot) as ShopScreen;
-            shopWindow.Construct(adsService, progressService, inAppService, assetProvider);
+            // var windowConfig = configsService.ForScreen(ScreenType.Shop);
+            // ShopScreen shopWindow = Object.Instantiate(windowConfig.prefab, uiRoot) as ShopScreen;
+            // shopWindow.Construct(adsService, progressService, inAppService, assetProvider);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Bootstrap;
 using Constants;
+using Cysharp.Threading.Tasks;
 using Factories;
 using Factories.Interfaces;
 using GameSM.Interfaces;
@@ -11,7 +12,6 @@ using Services.GameCamera;
 using Services.GameInput;
 using Services.GameProgress;
 using Services.GameServiceLocator;
-using Services.IAp;
 using Services.Player;
 using Services.Random;
 using Services.SaveLoad;
@@ -49,7 +49,6 @@ namespace GameSM.States
         {
             RegisterConfigsService();
             RegisterRandomService();
-            RegisterAdsService();
             RegisterAssetProvider();
             serviceLocator.RegisterService<IGameStateMachine>(stateMachine);
             serviceLocator.RegisterService<CameraService>(new CameraService());
@@ -57,7 +56,7 @@ namespace GameSM.States
             serviceLocator.RegisterService<IInputService>(InputService());
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
             serviceLocator.RegisterService<IScreenService>(new ScreenService());
-            RegisterInAppService(new InAppProvider(),serviceLocator.LocateService<IGameProgressService>());
+            //RegisterInAppService(new InAppProvider(), serviceLocator.LocateService<IGameProgressService>());
 
             RegisterGamePrefabFactory();
             RegisterGameUiFactory();
@@ -68,10 +67,10 @@ namespace GameSM.States
                 serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));
         }
 
-        private void RegisterAssetProvider()
+        private async UniTaskVoid RegisterAssetProvider()
         {
             var assetProvider = new AssetProvider();
-            assetProvider.InitializeAsync();
+            await assetProvider.InitializeAsync();
             serviceLocator.RegisterService<IAssetProvider>(assetProvider);
         }
 
@@ -81,12 +80,13 @@ namespace GameSM.States
             adsService.Initialize();
             serviceLocator.RegisterService(adsService);
         }
-        private void RegisterInAppService(InAppProvider inAppProvider, IGameProgressService progressService)
-        {
-            InAppService inAppService = new InAppService(inAppProvider, progressService);
-            inAppService.Initialize();
-            serviceLocator.RegisterService<IInAppService>(inAppService);
-        }
+
+        // private void RegisterInAppService(InAppProvider inAppProvider, IGameProgressService progressService)
+        // {
+        //     InAppService inAppService = new InAppService(inAppProvider, progressService);
+        //     inAppService.Initialize();
+        //     serviceLocator.RegisterService<IInAppService>(inAppService);
+        // }
 
         private void RegisterConfigsService()
         {
@@ -118,8 +118,7 @@ namespace GameSM.States
                 serviceLocator.LocateService<IAssetProvider>(),
                 serviceLocator.LocateService<IConfigsService>(),
                 serviceLocator.LocateService<IScreenService>(),
-                serviceLocator.LocateService<IAdsService>(),
-                serviceLocator.LocateService<IInAppService>()));
+                serviceLocator.LocateService<IAdsService>()));
         }
 
         private IInputService InputService()

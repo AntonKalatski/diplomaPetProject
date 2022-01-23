@@ -14,7 +14,7 @@ namespace UI.Services
 
                     break;
                 case ScreenType.Shop:
-                    ServiceLocator.Container.LocateService<IGameUIFactory>().CreateShop();
+                    //ServiceLocator.Container.LocateService<IGameUIFactory>().CreateShop();
                     break;
                 case ScreenType.MainMenu:
 

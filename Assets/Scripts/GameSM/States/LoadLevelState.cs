@@ -50,8 +50,8 @@ namespace GameSM.States
             prefabFactory.CleanUp();
             uiFactory.CleanUp();
 
-           // prefabFactory.WarmUp();
-            //uiFactory.WarmUp();
+            prefabFactory.WarmUp();
+            uiFactory.WarmUp();
             sceneLoader.Load(payload, onLoaded: OnLevelLoaded);
         }
 
@@ -69,12 +69,11 @@ namespace GameSM.States
             var levelData = LevelData();
 
             InitializeZombieSpawners(levelData);
-
             var survivor = await InitializePlayer(levelData);
-            
+
             InitializeUiRoot();
             await InitializeHud(survivor.GetComponent<IHealth>());
-            
+
             ServiceLocator.Container.LocateService<CameraService>().SetFollower(survivor.transform);
         }
 

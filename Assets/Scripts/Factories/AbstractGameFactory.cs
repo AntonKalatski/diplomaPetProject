@@ -27,6 +27,7 @@ namespace Factories
         {
             ProgressLoadables.Clear();
             ProgressSaveables.Clear();
+            assetProvider.CleanUp();
         }
         protected async Task<GameObject> Instantiate(string prefabPath)
         {

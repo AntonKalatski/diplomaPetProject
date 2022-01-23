@@ -29,6 +29,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 2694868f72288f04bab56a6f4fc3b8ae, type: 2}
   - {fileID: 11400000, guid: bc11368c09a839b45b9287d50441af7d, type: 2}
+  - {fileID: 11400000, guid: a8ef46af850c9f744a5bc08f69a5f59a, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -39,6 +40,34 @@ MonoBehaviour:
     - m_InheritedParent: 
       m_Id: 9766a86261e7aac48b49328f6cb37339
       m_ProfileName: Default
+      m_Values:
+      - m_Id: 115f7adce46fb6943a7bf00c2447f6c6
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: da9226d79a958054dac3d1db873f8e22
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: 5ed05fe1b5589f64fbd9244a409fe85e
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 49019fecdea90074abff6ce5919274e8
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 4a34d8c0958b3334d88afad4b74a0bb3
+        m_Value: http://localhost/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 88bb6b697fb6fbf42897c49efa979616
+      m_ProfileName: Android
+      m_Values:
+      - m_Id: 115f7adce46fb6943a7bf00c2447f6c6
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: da9226d79a958054dac3d1db873f8e22
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: 5ed05fe1b5589f64fbd9244a409fe85e
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 49019fecdea90074abff6ce5919274e8
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 4a34d8c0958b3334d88afad4b74a0bb3
+        m_Value: http://localhost/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: d99e594ea565025448027517fdd877ff
+      m_ProfileName: TestRemoteLoad
       m_Values:
       - m_Id: 115f7adce46fb6943a7bf00c2447f6c6
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
