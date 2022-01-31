@@ -1,2 +1,2 @@
-# SyndicateCourse
-# SyndicateCourse
+# diploma pet project
+
