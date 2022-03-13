@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95994ea61aca439889bde1013aece810, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  type: 3
+  type: 0
   levelKey: Main
   playerSpawnPoint:
     position: {x: -0.24, y: 0, z: 7.98}

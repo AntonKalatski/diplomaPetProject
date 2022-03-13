@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Services.Configs.Zombie;
+using Services.Configs;
 using Spawner;
 using UnityEditor;
 using UnityEngine;

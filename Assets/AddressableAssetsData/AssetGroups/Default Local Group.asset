@@ -21,122 +21,82 @@ MonoBehaviour:
     m_Address: Zombie_Prisoner
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 21243d795617ce445b44073bee76c72c
     m_Address: Zombie_Security
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 9172b776598ca90448277d43a7b00e08
     m_Address: Zombie_Soldier
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: f035ab47a0541a84e839d73a419ff29f
     m_Address: Zombie_StreetMan
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: f344b7f2d0426604599821e9d21babff
     m_Address: MedKit
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 2f03df714bfaa8947a1420718042084b
     m_Address: SpawnPoint
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 460f9e46e9a3c094a874c7b9670dc789
     m_Address: Female_Survivor
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 5ec10a96d2aca5b42aec6265d337ac2b
     m_Address: Hud
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 04258020e4f4d5b4ab2c04bc18300ad9
     m_Address: UIRoot
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2969302070231241560, guid: 04258020e4f4d5b4ab2c04bc18300ad9, type: 3}
-    m_TargetAsset: {fileID: 2969302070231241560, guid: 04258020e4f4d5b4ab2c04bc18300ad9, type: 3}
   - m_GUID: b7c93c1de93b4524cbd725009db7ac3b
     m_Address: ShopItem
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 7591838429927522310, guid: b7c93c1de93b4524cbd725009db7ac3b, type: 3}
-    m_TargetAsset: {fileID: 7591838429927522310, guid: b7c93c1de93b4524cbd725009db7ac3b, type: 3}
   - m_GUID: f9e74118dc9be124da26a710d99cf4b7
     m_Address: InAppIcon_10
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: f9e74118dc9be124da26a710d99cf4b7, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: f9e74118dc9be124da26a710d99cf4b7, type: 3}
   - m_GUID: 29db6dcc2dbf21e4ca51fc4af312faa1
     m_Address: InAppIcon_9
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 29db6dcc2dbf21e4ca51fc4af312faa1, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 29db6dcc2dbf21e4ca51fc4af312faa1, type: 3}
   - m_GUID: 1451545c88dc1e5429f9c1b1769c5a21
     m_Address: InAppIcon_8
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 1451545c88dc1e5429f9c1b1769c5a21, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 1451545c88dc1e5429f9c1b1769c5a21, type: 3}
   - m_GUID: 3204599dc71b9fe47bafe4ab9a13a507
     m_Address: InAppIcon_7
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 3204599dc71b9fe47bafe4ab9a13a507, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 3204599dc71b9fe47bafe4ab9a13a507, type: 3}
   - m_GUID: 8e55a647fe13f2846a9e105114a23817
     m_Address: InAppIcon_6
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 8e55a647fe13f2846a9e105114a23817, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 8e55a647fe13f2846a9e105114a23817, type: 3}
   - m_GUID: e4fd19bde5c07a046bdbec2a40469db5
     m_Address: InAppIcon_5
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: e4fd19bde5c07a046bdbec2a40469db5, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: e4fd19bde5c07a046bdbec2a40469db5, type: 3}
   - m_GUID: b187ed1ae85276e40b331232c4a7bfe1
     m_Address: InAppIcon_4
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: b187ed1ae85276e40b331232c4a7bfe1, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: b187ed1ae85276e40b331232c4a7bfe1, type: 3}
   - m_GUID: 6d68d5c3cf89ba24983efa8a0690ed01
     m_Address: InAppIcon_3
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 6d68d5c3cf89ba24983efa8a0690ed01, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 6d68d5c3cf89ba24983efa8a0690ed01, type: 3}
   - m_GUID: d28113478ccb3fa49b5cff3902aa50ed
     m_Address: InAppIcon_2
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: d28113478ccb3fa49b5cff3902aa50ed, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: d28113478ccb3fa49b5cff3902aa50ed, type: 3}
   - m_GUID: 6f1227dc247cf4f44ae6c2cda1afadec
     m_Address: InAppIcon_1
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: 6f1227dc247cf4f44ae6c2cda1afadec, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: 6f1227dc247cf4f44ae6c2cda1afadec, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4b35ec37e2caebe48ba340b8f93fc772, type: 2}
   m_SchemaSet:

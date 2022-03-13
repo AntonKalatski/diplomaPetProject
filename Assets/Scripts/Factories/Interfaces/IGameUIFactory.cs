@@ -9,5 +9,7 @@ namespace Factories.Interfaces
         Task<GameObject> CreateHud();
         void CreateShop();
         Task WarmUp();
+        void CreateMainMenu();
+        void CreateSettings();
     }
 }

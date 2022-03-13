@@ -25,16 +25,15 @@ namespace GameSM.States
         public void Enter()
         {
             TryLoadProgress();
-            gameStateMachine.Enter<LoadLevelState, string>(gameProgressService.PlayerProgressData.worldData
-                .PositionOnLevel
-                .level);
+            gameStateMachine.Enter<MainMenuState>();
         }
 
         public void Exit()
         {
         }
 
-        private void TryLoadProgress() => gameProgressService.PlayerProgressData = saveLoadService.LoadProgress() ?? NewProgress();
+        private void TryLoadProgress() =>
+            gameProgressService.PlayerProgressData = saveLoadService.LoadProgress() ?? NewProgress();
 
         private PlayerProgressData NewProgress()
         {

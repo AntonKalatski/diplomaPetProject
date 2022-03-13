@@ -1,3 +1,4 @@
+using UI.Elements;
 using UnityEngine;
 
 namespace Services.GameInput
@@ -6,11 +7,16 @@ namespace Services.GameInput
     {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
-        private const string Button = "Fire";
+        protected const string Button = "Fire1";
+        protected AttackButton attackButton;
         public abstract Vector2 Axis { get; }
 
-        public bool IsAttackButtonUp() => SimpleInput.GetButtonUp(Button);
+        public abstract bool IsAttackButtonUp();
 
+        public void RegisterAttackButton(AttackButton button)
+        {
+            attackButton = button;
+        }
         protected static Vector2 SimpleInputAxis() =>
             new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
     }

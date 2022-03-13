@@ -27,11 +27,13 @@ namespace SimpleInputNamespace
 
 		public void OnPointerDown( PointerEventData eventData )
 		{
+			Debug.LogError("OnPointerDown in button input ui");
 			button.value = true;
 		}
 
 		public void OnPointerUp( PointerEventData eventData )
 		{
+			Debug.LogError("OnPointerUp in button input ui");
 			button.value = false;
 		}
 	}

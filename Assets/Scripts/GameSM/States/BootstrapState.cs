@@ -7,7 +7,7 @@ using GameSM.Interfaces;
 using Providers.Assets;
 using Services;
 using Services.Ads;
-using Services.Configs.Zombie;
+using Services.Configs;
 using Services.GameCamera;
 using Services.GameInput;
 using Services.GameProgress;
@@ -16,6 +16,7 @@ using Services.Player;
 using Services.Random;
 using Services.SaveLoad;
 using UI.Services;
+using UnityEngine;
 
 namespace GameSM.States
 {
@@ -37,19 +38,31 @@ namespace GameSM.States
             RegisterServices();
         }
 
-        public void Enter() => sceneLoader.Load(GameConstants.Loading, onLoaded: EnterLoadLevel);
+        public void Enter()
+        {
+            Debug.Log("Enter bootstrapstate");
+            sceneLoader.Load(GameConstants.Loading, onLoaded: EnterLoadLevel);
+        }
 
         public void Exit()
         {
+            Debug.Log("Exit bootstrapstate");
         }
 
         private void EnterLoadLevel() => stateMachine.Enter<LoadProgressState>();
+
+        private void RegisterRandomService()
+        {
+            IRandomService randomService = new RandomService();
+            serviceLocator.RegisterService(randomService);
+        }
 
         private void RegisterServices()
         {
             RegisterConfigsService();
             RegisterRandomService();
-            RegisterAssetProvider();
+            serviceLocator.RegisterService<IAssetProvider>(new AssetProvider());
+
             serviceLocator.RegisterService<IGameStateMachine>(stateMachine);
             serviceLocator.RegisterService<CameraService>(new CameraService());
             serviceLocator.RegisterService<IPlayerGameObjectProvider>(new PlayerGameObjectProvider());
@@ -67,27 +80,6 @@ namespace GameSM.States
                 serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));
         }
 
-        private async UniTaskVoid RegisterAssetProvider()
-        {
-            var assetProvider = new AssetProvider();
-            await assetProvider.InitializeAsync();
-            serviceLocator.RegisterService<IAssetProvider>(assetProvider);
-        }
-
-        private void RegisterAdsService()
-        {
-            IAdsService adsService = new AdsService();
-            adsService.Initialize();
-            serviceLocator.RegisterService(adsService);
-        }
-
-        // private void RegisterInAppService(InAppProvider inAppProvider, IGameProgressService progressService)
-        // {
-        //     InAppService inAppService = new InAppService(inAppProvider, progressService);
-        //     inAppService.Initialize();
-        //     serviceLocator.RegisterService<IInAppService>(inAppService);
-        // }
-
         private void RegisterConfigsService()
         {
             IConfigsService configsService = new ConfigsService();
@@ -95,10 +87,11 @@ namespace GameSM.States
             serviceLocator.RegisterService(configsService);
         }
 
-        private void RegisterRandomService()
+        private void RegisterAdsService()
         {
-            IRandomService randomService = new RandomService();
-            serviceLocator.RegisterService(randomService);
+            IAdsService adsService = new AdsService();
+            adsService.Initialize();
+            serviceLocator.RegisterService(adsService);
         }
 
         private void RegisterGamePrefabFactory()
@@ -114,11 +107,13 @@ namespace GameSM.States
         private void RegisterGameUiFactory()
         {
             serviceLocator.RegisterService<IGameUIFactory>(new GameUIFactory(
+                stateMachine,
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IAssetProvider>(),
                 serviceLocator.LocateService<IConfigsService>(),
                 serviceLocator.LocateService<IScreenService>(),
                 serviceLocator.LocateService<IAdsService>()));
+            serviceLocator.LocateService<ITestService>();
         }
 
         private IInputService InputService()
@@ -130,4 +125,15 @@ namespace GameSM.States
 #endif
         }
     }
+
+    internal interface ITestService : IService
+    {
+    }
 }
+
+// private void RegisterInAppService(InAppProvider inAppProvider, IGameProgressService progressService)
+// {
+//     InAppService inAppService = new InAppService(inAppProvider, progressService);
+//     inAppService.Initialize();
+//     serviceLocator.RegisterService<IInAppService>(inAppService);
+// }

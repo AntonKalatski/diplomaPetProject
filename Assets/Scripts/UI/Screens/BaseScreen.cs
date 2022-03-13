@@ -9,7 +9,7 @@ namespace UI.Screens
     {
         [SerializeField] protected Button closeButton;
         private IGameProgressService progressService;
-        protected PlayerProgressData Progress => progressService.PlayerProgressData;
+        protected IGameProgressService ProgressService => progressService;
 
         protected virtual void Construct(IGameProgressService progressService)
         {

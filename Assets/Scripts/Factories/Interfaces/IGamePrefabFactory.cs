@@ -4,6 +4,7 @@ using Configs.LootConfig;
 using Cysharp.Threading.Tasks;
 using Spawner;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Factories.Interfaces
 {

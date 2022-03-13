@@ -35,7 +35,7 @@ namespace UI.Screens.Shop
         {
             adItem.Subscribe();
             shopItems.Subscribe();
-            Progress.killData.AddKillCounterListener(RefreshKillCount);
+            ProgressService.PlayerProgressData.killData.AddKillCounterListener(RefreshKillCount);
         }
 
         protected override void UnsubscribeUpdates()
@@ -43,9 +43,9 @@ namespace UI.Screens.Shop
             base.UnsubscribeUpdates();
             adItem.CleanUp();
             shopItems.CleanUp();
-            Progress.killData.RemoveKillCounterListener(RefreshKillCount);
+            ProgressService.PlayerProgressData.killData.RemoveKillCounterListener(RefreshKillCount);
         }
 
-        private void RefreshKillCount() => killCounter.text = Progress.killData.killedZombies.ToString();
+        private void RefreshKillCount() => killCounter.text = ProgressService.PlayerProgressData.killData.killedZombies.ToString();
     }
 }

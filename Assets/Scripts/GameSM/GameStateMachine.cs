@@ -4,7 +4,8 @@ using Bootstrap;
 using Factories.Interfaces;
 using GameSM.Interfaces;
 using GameSM.States;
-using Services.Configs.Zombie;
+using Providers.Assets;
+using Services.Configs;
 using Services.GameProgress;
 using Services.GameServiceLocator;
 using Services.SaveLoad;
@@ -26,7 +27,10 @@ namespace GameSM
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, serviceLocator),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     serviceLocator.LocateService<IGameProgressService>(),
-                    serviceLocator.LocateService<ISaveLoadService>()),
+                    serviceLocator.LocateService<ISaveLoadService>()), 
+                [typeof(MainMenuState)] = new MainMenuState(this,
+                    serviceLocator.LocateService<IGameProgressService>(),
+                    serviceLocator.LocateService<IGameUIFactory>()),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain,
                     serviceLocator.LocateService<IGameUIFactory>(), serviceLocator.LocateService<IGamePrefabFactory>(),
                     serviceLocator.LocateService<IGameProgressService>(), serviceLocator.LocateService<IConfigsService>()),

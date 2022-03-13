@@ -11,16 +11,15 @@ namespace UI.Services
             switch (type)
             {
                 case ScreenType.Unknown:
-
                     break;
                 case ScreenType.Shop:
-                    //ServiceLocator.Container.LocateService<IGameUIFactory>().CreateShop();
+                    ServiceLocator.Container.LocateService<IGameUIFactory>().CreateShop();
                     break;
                 case ScreenType.MainMenu:
-
+                    ServiceLocator.Container.LocateService<IGameUIFactory>().CreateMainMenu();
                     break;
                 case ScreenType.Settings:
-
+                    ServiceLocator.Container.LocateService<IGameUIFactory>().CreateSettings();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

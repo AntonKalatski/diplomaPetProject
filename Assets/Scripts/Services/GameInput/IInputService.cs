@@ -1,4 +1,5 @@
 using Services.GameServiceLocator;
+using UI.Elements;
 using UnityEngine;
 
 namespace Services
@@ -7,5 +8,6 @@ namespace Services
     {
         Vector2 Axis { get; }
         bool IsAttackButtonUp();
+        void RegisterAttackButton(AttackButton attackButton);
     }
 }

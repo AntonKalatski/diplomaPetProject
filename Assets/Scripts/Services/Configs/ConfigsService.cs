@@ -9,7 +9,7 @@ using Spawner;
 using UI.Services;
 using UnityEngine;
 
-namespace Services.Configs.Zombie
+namespace Services.Configs
 {
     public class ConfigsService : IConfigsService
     {

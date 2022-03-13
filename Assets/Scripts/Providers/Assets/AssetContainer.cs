@@ -10,6 +10,7 @@ namespace Providers.Assets
     public class AssetContainer<T> : AbstractAssetContainer where T : Object
     {
         private readonly AssetReference _reference;
+        private readonly string _address;
         private AsyncOperationHandle<T> _handle;
         private readonly T _asset;
 
@@ -19,6 +20,10 @@ namespace Providers.Assets
         {
             _reference = reference;
         }
+        public AssetContainer(string address)
+        {
+            _address = address;
+        }
 
         public async UniTask<GameObject> CreateInstance(Transform parent = null)
         {
@@ -26,7 +31,7 @@ namespace Providers.Assets
             _instances.Add(instance);
 
             return instance;
-        }
+        } 
 
         public void ReleaseInstance(GameObject instance)
         {

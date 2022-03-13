@@ -2,6 +2,7 @@
 using GameSM.Interfaces;
 using Services.GameServiceLocator;
 using UI.Loading;
+using UnityEngine;
 
 namespace GameSM.States
 {
@@ -25,6 +26,7 @@ namespace GameSM.States
 
         public void Enter()
         {
+            Debug.Log("Enter GameLoopState");
             curtain.Hide();
         }
 

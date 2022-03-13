@@ -8,13 +8,14 @@ namespace Services.GameInput
         {
             get
             {
-                
                 Vector2 axis = SimpleInputAxis();
                 if (axis == Vector2.zero)
                     axis = UnityAxis();
                 return axis;
             }
         }
+
+        public override bool IsAttackButtonUp() => SimpleInput.GetButtonUp(Button);
 
         private static Vector2 UnityAxis() => new Vector2(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
     }

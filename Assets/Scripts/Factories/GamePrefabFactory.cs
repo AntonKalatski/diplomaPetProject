@@ -10,7 +10,7 @@ using GameElements.Health;
 using Player;
 using Providers.Assets;
 using Services;
-using Services.Configs.Zombie;
+using Services.Configs;
 using Services.GameCamera;
 using Services.GameProgress;
 using Services.GameServiceLocator;
@@ -19,6 +19,7 @@ using Services.Random;
 using Spawner;
 using UI.Actors;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zombies;
 using Object = UnityEngine.Object;
 
@@ -46,8 +47,7 @@ namespace Factories
 
         public async Task<GameObject> CreateSurvivor(Vector3 atPoint)
         {
-            var prefab = await assetProvider.Load<GameObject>(AssetsAdresses.FemaleSurvivor);
-            var player = InstantiateRegisteredAsync(prefab, atPoint);
+            var player = await InstantiateRegisteredAsync(AssetsAdresses.FemaleSurvivor, atPoint);
             var inputService = ServiceLocator.Container.LocateService<IInputService>();
             var cameraService = ServiceLocator.Container.LocateService<CameraService>();
             player.GetComponent<PlayerMovement>().Construct(cameraService, inputService);
@@ -115,9 +115,8 @@ namespace Factories
 
         public async void CreateZombieSpawner(Vector3 at, string id, ZombieType zombieType)
         {
-            var prefab = await assetProvider.Load<GameObject>(AssetsAdresses.Spawner);
-            SpawnPoint spawner = InstantiateRegisteredAsync(prefab, at).GetComponent<SpawnPoint>();
-
+            var go = await InstantiateRegisteredAsync(AssetsAdresses.Spawner, at);
+            if (!go.TryGetComponent(out SpawnPoint spawner)) return;
             spawner.Construct(this);
             spawner.Id = id;
             spawner.type = zombieType;

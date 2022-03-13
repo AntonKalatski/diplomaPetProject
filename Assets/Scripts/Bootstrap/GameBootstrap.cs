@@ -7,7 +7,7 @@ namespace Bootstrap
 {
     public class GameBootstrap : MonoBehaviour, ICoroutineRunner
     {
-        [SerializeField] private AssetReference loadingScreen;
+        //[SerializeField] private AssetReference loadingScreen;
         [SerializeField] private LoadingCurtain loadingScreenPrefab;
         private Game game;
 

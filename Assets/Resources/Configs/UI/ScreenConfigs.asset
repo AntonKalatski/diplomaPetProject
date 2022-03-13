@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b4855cb68147ed8e86561478b8621f, type: 3}
   m_Name: ScreenConfigs
   m_EditorClassIdentifier: 
-  type: 4
+  type: 0
   screens:
   - type: 1
     prefab: {fileID: 1173515745696773828, guid: 55c5009a8858f304ca57e76b62eec653, type: 3}
   - type: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 3780232079716481253, guid: 360dddd1f079212459d3bd5f76a3f2b5, type: 3}
+  - type: 3
+    prefab: {fileID: 8853676345007679367, guid: 2583abb156b7bc049a0f59e5225c0c2b, type: 3}

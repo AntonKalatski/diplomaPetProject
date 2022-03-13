@@ -10,6 +10,8 @@ namespace Constants
         public const string UIRoot = "UIRoot";
         public const string MedKit = "MedKit";
         public const string Spawner = "SpawnPoint";
+        public static string MainMenu = "MainMenu";
+
         public static T RandomValue<T>(IReadOnlyList<T> collection) => collection[Random.Range(0, collection.Count)];
     }
 }

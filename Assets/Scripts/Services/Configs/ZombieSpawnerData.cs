@@ -1,7 +1,8 @@
 ﻿using Spawner;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
-namespace Services.Configs.Zombie
+namespace Services.Configs
 {
     [System.Serializable]
     public class ZombieSpawnerData
@@ -9,6 +10,7 @@ namespace Services.Configs.Zombie
         public string Id;
         public ZombieType zombieType;
         public Vector3 Position;
+        public AssetReference spawnerReference;
         public ZombieSpawnerData(string id, ZombieType zombieType, Vector3 position)
         {
             Id = id;

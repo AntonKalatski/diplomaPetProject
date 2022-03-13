@@ -5,7 +5,8 @@ using Extensions;
 using Factories.Interfaces;
 using GameElements.Health;
 using GameSM.Interfaces;
-using Services.Configs.Zombie;
+using Providers.Assets;
+using Services.Configs;
 using Services.GameCamera;
 using Services.GameProgress;
 using Services.GameServiceLocator;
@@ -44,18 +45,23 @@ namespace GameSM.States
             this.configsService = configsService;
         }
 
-        public void Enter(string payload)
+        public async void Enter(string payload)
         {
+            Debug.Log("Enter LoadLevelState");
             curtain.Show();
             prefabFactory.CleanUp();
             uiFactory.CleanUp();
+            //assetProvider.CleanUp();
 
-            prefabFactory.WarmUp();
-            uiFactory.WarmUp();
-            sceneLoader.Load(payload, onLoaded: OnLevelLoaded);
+            // await prefabFactory.WarmUp();
+            // await uiFactory.WarmUp();
+            await sceneLoader.Load(payload, onLoaded: OnLevelLoaded);
         }
 
-        public void Exit() => curtain.Show();
+        public void Exit()
+        {
+            Debug.Log("Exit LoadLevelState");
+        }
 
         private async void OnLevelLoaded()
         {

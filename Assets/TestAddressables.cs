@@ -20,11 +20,6 @@ public class TestAddressables : MonoBehaviour
 
     private async void ReleaseReference()
     {
-        var service = ServiceLocator.Container.LocateService<IAssetProvider>();
-        if (!ReferenceEquals(service, null))
-        {
-            service.CleanUp();
-        }
     }
 
     // Update is called once per frame

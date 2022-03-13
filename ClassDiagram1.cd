@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameSM.GameStateMachine" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAABAAAAIAAAAAAAAAEAAAEAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\GameStateMachine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameSM.States.BootstrapState" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQABAQAgCAAQAAIAAAAAQBAEAEAAAIIAIAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\States\BootstrapState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameSM.States.GameLoopState" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAEAEAAAAIAIAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\States\GameLoopState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameSM.States.LoadLevelState" BaseTypeListCollapsed="true">
+    <Position X="23.25" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAEAAAAAgAggAEAABAAQAAAAEAEBgAAIAAAEAgAAhA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\States\LoadLevelState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameSM.States.LoadProgressState" BaseTypeListCollapsed="true">
+    <Position X="21.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAEAgAAIEAAAAoAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\States\LoadProgressState.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="GameSM.IGameStateMachine">
+    <Position X="12.25" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\IGameStateMachine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GameSM.Interfaces.IExitableState">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\Interfaces\IExitableState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GameSM.Interfaces.IPayloadedState&lt;TPayload&gt;">
+    <Position X="9" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\Interfaces\IPayloadedState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GameSM.Interfaces.IState">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameSM\Interfaces\IState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

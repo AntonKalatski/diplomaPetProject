@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1993796226671664934}
   - component: {fileID: 1993796226671664933}
   m_Layer: 0
-  m_Name: Bootstraper
+  m_Name: GameBootstrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreenPrefab: {fileID: 39899592937800819, guid: 032a56c1f05ba344088231a7dfce3307, type: 3}
-  configsContainer: {fileID: 11400000, guid: 027c98a5fed86404f8589218f10f2da0, type: 2}

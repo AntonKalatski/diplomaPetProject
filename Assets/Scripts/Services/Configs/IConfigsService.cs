@@ -7,7 +7,7 @@ using Services.GameServiceLocator;
 using Spawner;
 using UI.Services;
 
-namespace Services.Configs.Zombie
+namespace Services.Configs
 {
     public interface IConfigsService : IService
     {

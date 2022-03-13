@@ -1,6 +1,9 @@
 ﻿using Editor;
 using GameData;
 using GameElements.Health;
+using Services;
+using Services.GameServiceLocator;
+using TMPro;
 using UnityEngine;
 using Zombies;
 
@@ -22,6 +25,7 @@ namespace Player
         private int layerMask;
         private Collider[] hits = new Collider[3];
         private ZombieDeath zombie1;
+        private IInputService inputService;
 
         public void OnPlayerAttack()
         {
@@ -72,24 +76,27 @@ namespace Player
         {
         }
 
-        private void Awake() => layerMask = 1 << LayerMask.NameToLayer("Enemy");
+        private void Awake()
+        {
+            layerMask = 1 << LayerMask.NameToLayer("Enemy");
+            inputService = ServiceLocator.Container.LocateService<IInputService>();
+        }
 
         private void Update()
         {
-            CheckCoolDown();
             if (CanAttack())
                 Attack();
         }
 
         private void OnEnable() => temp = 0;
 
-        private void CheckCoolDown()
-        {
-            if (!CooldownEnd())
-                temp -= Time.deltaTime;
-        }
+        // private void CheckCoolDown()
+        // {
+        //     if (!CooldownEnd())
+        //         temp -= Time.deltaTime;
+        // }
 
-        private bool CanAttack() => !isAttacking && CooldownEnd();
+        private bool CanAttack() => !isAttacking && inputService.IsAttackButtonUp();
 
         private bool CooldownEnd() => temp <= 0;
 
