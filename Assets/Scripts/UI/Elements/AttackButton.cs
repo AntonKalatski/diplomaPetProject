@@ -1,6 +1,5 @@
 ﻿using System;
 using Services;
-using Services.GameInput;
 using Services.GameServiceLocator;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,14 +9,15 @@ namespace UI.Elements
     public class AttackButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     {
         private IInputService inputService;
-        public bool IsButtonUp { get; private set; }
-        private void Awake()
+
+        private void Start()
         {
             inputService = ServiceLocator.Container.LocateService<IInputService>();
-            inputService.RegisterAttackButton(this);
         }
-        public void OnPointerUp(PointerEventData eventData) => IsButtonUp = true;
 
-        public void OnPointerDown(PointerEventData eventData) => IsButtonUp = false;
+        public bool IsButtonUp { get; private set; } = false;
+        public void OnPointerUp(PointerEventData eventData) => IsButtonUp = false;
+
+        public void OnPointerDown(PointerEventData eventData) => inputService.AttackButtonPointerDown();
     }
 }

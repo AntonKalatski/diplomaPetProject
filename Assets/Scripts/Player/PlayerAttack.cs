@@ -3,7 +3,6 @@ using GameData;
 using GameElements.Health;
 using Services;
 using Services.GameServiceLocator;
-using TMPro;
 using UnityEngine;
 using Zombies;
 
@@ -80,13 +79,20 @@ namespace Player
         {
             layerMask = 1 << LayerMask.NameToLayer("Enemy");
             inputService = ServiceLocator.Container.LocateService<IInputService>();
+            inputService.OnAttackButton += AttackHandler;
         }
 
-        private void Update()
+        private void AttackHandler()
         {
-            if (CanAttack())
+            if (!isAttacking)
                 Attack();
         }
+
+        // private void LateUpdate()
+        // {
+        //     if (CanAttack())
+        //         Attack();
+        // }
 
         private void OnEnable() => temp = 0;
 
@@ -96,7 +102,7 @@ namespace Player
         //         temp -= Time.deltaTime;
         // }
 
-        private bool CanAttack() => !isAttacking && inputService.IsAttackButtonUp();
+        private bool CanAttack() => !isAttacking;
 
         private bool CooldownEnd() => temp <= 0;
 
@@ -106,8 +112,10 @@ namespace Player
 
         private void Attack()
         {
-            if (ReferenceEquals(activeEnemy, null))
-               return;
+            // Debug.Log("Attack");
+            // if (ReferenceEquals(activeEnemy, null))
+            //     return;
+            Debug.Log("Attack really");
             transform.LookAt(activeEnemy);
             anim.Attack();
             isAttacking = true;

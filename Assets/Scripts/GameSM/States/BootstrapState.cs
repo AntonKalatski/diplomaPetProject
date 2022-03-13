@@ -119,9 +119,9 @@ namespace GameSM.States
         private IInputService InputService()
         {
 #if UNITY_EDITOR
-            return new MobileInputService();
-#else
             return new StandaloneInputService();
+#else
+            return new MobileInputService();
 #endif
         }
     }
