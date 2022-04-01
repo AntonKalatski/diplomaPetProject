@@ -3,6 +3,7 @@ using Constants;
 using Factories.Interfaces;
 using GameSM;
 using Providers.Assets;
+using Services;
 using Services.Ads;
 using Services.Configs;
 using Services.GameProgress;
@@ -24,19 +25,26 @@ namespace Factories
         private readonly IConfigsService configsService;
         private readonly IScreenService screenService;
         private readonly ISoundService soundService;
+        private readonly IInputService inputService;
         private readonly IVibrationService vibrationService;
         private readonly IAdsService adsService;
 
         private Transform uiRoot;
 
-        public GameUIFactory(GameStateMachine gameStateMachine, IGameProgressService progressService,
+        public GameUIFactory(
+            GameStateMachine gameStateMachine,
+            IGameProgressService progressService,
             IAssetProvider assetProvider,
-            IConfigsService configsService, IScreenService screenService, IAdsService adsService) : base(assetProvider)
+            IInputService inputService,
+            IConfigsService configsService,
+            IScreenService screenService,
+            IAdsService adsService) : base(assetProvider)
         {
             this.gameStateMachine = gameStateMachine;
             this.progressService = progressService;
             this.configsService = configsService;
             this.screenService = screenService;
+            this.inputService = inputService;
             this.adsService = adsService;
         }
 
@@ -55,11 +63,27 @@ namespace Factories
 
         public async Task<GameObject> CreateHud()
         {
-            GameObject hud = await InstantiateRegisteredAsync(AssetsAdresses.Hud);
+            GameObject hud;
+            switch (Application.platform)
+            {
+                case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.WindowsEditor:
+                {
+                    hud = await InstantiateRegisteredAsync(AssetsAdresses.HudStandalone);
+                    break;
+                }
+                case RuntimePlatform.Android:
+                default:
+                {
+                    hud = await InstantiateRegisteredAsync(AssetsAdresses.Hud);
+                    inputService.AddInputPorvider(hud.GetComponentInChildren<AttackButton>());
+                    break;
+                }
+            }
+
             hud.GetComponentInChildren<KillCounterBar>().Construct(progressService.PlayerProgressData);
             foreach (var button in hud.GetComponentsInChildren<OpenScreenButton>())
                 button.Construct(screenService);
-
             return hud;
         }
 

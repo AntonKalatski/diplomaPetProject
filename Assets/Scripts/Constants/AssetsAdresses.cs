@@ -7,6 +7,7 @@ namespace Constants
     {
         public const string FemaleSurvivor = "Female_Survivor";
         public const string Hud = "Hud";
+        public const string HudStandalone = "Hud_Standalone";
         public const string UIRoot = "UIRoot";
         public const string MedKit = "MedKit";
         public const string Spawner = "SpawnPoint";

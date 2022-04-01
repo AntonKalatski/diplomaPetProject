@@ -1,4 +1,5 @@
-﻿using Editor;
+﻿using System;
+using Editor;
 using GameData;
 using GameElements.Health;
 using Services;
@@ -8,7 +9,7 @@ using Zombies;
 
 namespace Player
 {
-    public class PlayerAttack : MonoBehaviour, IProgressSaveable
+    public class PlayerAttack : MonoBehaviour, IProgressSaveable, IInputListener
     {
         [SerializeField] private PlayerAnimation anim;
         [SerializeField] private CharacterController charCont;
@@ -79,42 +80,34 @@ namespace Player
         {
             layerMask = 1 << LayerMask.NameToLayer("Enemy");
             inputService = ServiceLocator.Container.LocateService<IInputService>();
-            inputService.OnAttackButton += AttackHandler;
+            inputService.AddInputListener(this);
         }
 
-        private void AttackHandler()
+        private void OnDestroy()
+        {
+            inputService.RemoveInputListener(this);
+        }
+
+        public void AttackButton()
         {
             if (!isAttacking)
                 Attack();
         }
 
-        // private void LateUpdate()
-        // {
-        //     if (CanAttack())
-        //         Attack();
-        // }
-
         private void OnEnable() => temp = 0;
-
-        // private void CheckCoolDown()
-        // {
-        //     if (!CooldownEnd())
-        //         temp -= Time.deltaTime;
-        // }
 
         private bool CanAttack() => !isAttacking;
 
         private bool CooldownEnd() => temp <= 0;
 
-        private int Hit() =>
-            Physics.OverlapSphereNonAlloc(GetHitPos() + transform.forward, radius: attackRadius, hits,
+        private int Hit()
+        {
+            return Physics.OverlapSphereNonAlloc(GetHitPos() + transform.forward, radius: attackRadius, hits,
                 layerMask);
+        }
 
         private void Attack()
         {
-            // Debug.Log("Attack");
-            // if (ReferenceEquals(activeEnemy, null))
-            //     return;
             Debug.Log("Attack really");
             transform.LookAt(activeEnemy);
             anim.Attack();

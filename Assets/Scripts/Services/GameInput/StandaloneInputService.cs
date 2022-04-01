@@ -15,6 +15,17 @@ namespace Services.GameInput
             }
         }
 
+        protected override void HandleButtonClick(string buttonName)
+        {
+            Debug.Log($"Button click {buttonName}");
+        }
+
+        public override void Tick()
+        {
+            if (Input.GetButtonDown("Fire1"))
+                OnAttackButton?.Invoke();
+        }
+
         private static Vector2 UnityAxis() => new Vector2(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
     }
 }

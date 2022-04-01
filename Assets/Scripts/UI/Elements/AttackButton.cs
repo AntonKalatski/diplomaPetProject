@@ -1,23 +1,18 @@
 ﻿using System;
 using Services;
-using Services.GameServiceLocator;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UI.Elements
 {
-    public class AttackButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
+    public class AttackButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IInputProvider
     {
-        private IInputService inputService;
+        [SerializeField] private string buttonName = "Fire1";
+        public Action<string> OnButtonClickProvide { get; set; }
 
-        private void Start()
+        public void OnPointerUp(PointerEventData eventData) 
         {
-            inputService = ServiceLocator.Container.LocateService<IInputService>();
         }
-
-        public bool IsButtonUp { get; private set; } = false;
-        public void OnPointerUp(PointerEventData eventData) => IsButtonUp = false;
-
-        public void OnPointerDown(PointerEventData eventData) => inputService.AttackButtonPointerDown();
+        public void OnPointerDown(PointerEventData eventData) => OnButtonClickProvide?.Invoke(buttonName);
     }
 }

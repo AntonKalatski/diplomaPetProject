@@ -118,6 +118,7 @@ namespace GameSM.States
                 stateMachine,
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IAssetProvider>(),
+                serviceLocator.LocateService<IInputService>(),
                 serviceLocator.LocateService<IConfigsService>(),
                 serviceLocator.LocateService<IScreenService>(),
                 serviceLocator.LocateService<IAdsService>()));
@@ -126,11 +127,20 @@ namespace GameSM.States
 
         private IInputService InputService()
         {
-#if UNITY_EDITOR
-            return new StandaloneInputService();
-#else
-            return new MobileInputService();
-#endif
+            IInputService inputService = null;
+            switch (Application.platform)
+            {
+                case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.WindowsEditor:
+                    inputService = new StandaloneInputService();
+                    break;
+                case RuntimePlatform.Android:
+                default:
+                    inputService =  new MobileInputService();
+                    break;
+            }
+
+            return inputService;
         }
     }
 

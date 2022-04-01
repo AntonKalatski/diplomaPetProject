@@ -1,4 +1,5 @@
-﻿using Factories.Interfaces;
+﻿using Effects;
+using Factories.Interfaces;
 using GameData;
 using Player;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace Spawner
         public bool isSlained;
         public string Id { get; set; }
         private IGamePrefabFactory factory;
-        private ZombieDeath zombieDeath;
+        private BloodPuddleEffect puddle;
         private GameObject zombie;
 
         public void Construct(IGamePrefabFactory factory) => this.factory = factory;
@@ -39,15 +40,15 @@ namespace Spawner
         {
             Debug.Log("Try to spawn zombie");
            zombie = await factory.CreateZombie(type, transform);
-            zombieDeath = zombie.GetComponent<ZombieDeath>();
-            zombieDeath.AddOnDeathListener(ZombieDeathHandler);
+            puddle = zombie.GetComponent<BloodPuddleEffect>();
+            puddle.AddOnPuddleEffectListener(ZombieDeathHandler);
         }
 
         private void ZombieDeathHandler()
         {
             Debug.Log("ZombieDeathHandler");
-            if (!ReferenceEquals(zombieDeath, null))
-                zombieDeath.RemoveOnDeathListener(ZombieDeathHandler);
+            if (!ReferenceEquals(puddle, null))
+                puddle.RemovePuddleEffectListener(ZombieDeathHandler);
             isSlained = true;
             factory.ZombieDeath(type,zombie);
         }

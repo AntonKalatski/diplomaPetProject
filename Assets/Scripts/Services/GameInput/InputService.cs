@@ -1,5 +1,4 @@
 using System;
-using UI.Elements;
 using UnityEngine;
 
 namespace Services.GameInput
@@ -9,23 +8,39 @@ namespace Services.GameInput
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
         protected const string Button = "Fire";
-        protected AttackButton attackButton;
+        protected Action OnAttackButton;
         public abstract Vector2 Axis { get; }
-        public event Action OnAttackButton;
-        public void AttackButtonPointerDown()
+
+
+        public void AddInputListener(IInputListener inputListener)
         {
-            Debug.LogError("AttackButton CLick!");
-            OnAttackButton?.Invoke();
+            OnAttackButton += inputListener.AttackButton;
         }
 
-        public bool IsAttackButtonUp() => SimpleInput.GetButtonUp(Button);
+        public void RemoveInputListener(IInputListener inputListener)
+        {
+            OnAttackButton -= inputListener.AttackButton;
+        }
+
+        public void AddInputPorvider(IInputProvider inputProvider)
+        {
+            inputProvider.OnButtonClickProvide += HandleButtonClick;
+        }
+
+        public void RemoveInputPorvider(IInputProvider inputProvider)
+        {
+            inputProvider.OnButtonClickProvide -= HandleButtonClick;
+        }
+
+        protected abstract void HandleButtonClick(string buttonName);
 
         protected static Vector2 SimpleInputAxis() =>
             new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
 
         public virtual void Tick()
         {
-            Debug.Log($"Tick in input service type: {GetType()}");
         }
+
+        // public bool IsAttackButtonUp() => SimpleInput.GetButtonUp(Button);
     }
 }

@@ -97,6 +97,10 @@ MonoBehaviour:
     m_Address: InAppIcon_1
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: c4af904ff2bfdf34e8aa1cfe8443ef77
+    m_Address: Hud_Standalone
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4b35ec37e2caebe48ba340b8f93fc772, type: 2}
   m_SchemaSet:

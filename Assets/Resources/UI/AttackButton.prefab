@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9076254386273947145}
   - component: {fileID: 4253635538586960168}
   - component: {fileID: 766116036326013182}
-  - component: {fileID: 1530002255131012545}
   - component: {fileID: 3829605676450990805}
   - component: {fileID: 3456739631314301587}
   m_Layer: 0
@@ -78,21 +77,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1530002255131012545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7065484818607362915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button:
-    m_key: Fire
-    value: 0
 --- !u!114 &3829605676450990805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be0b1aa2f2d14e87b21629fdffd115b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonName: Fire1
