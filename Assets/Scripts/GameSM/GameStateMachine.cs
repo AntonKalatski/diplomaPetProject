@@ -4,6 +4,7 @@ using Bootstrap;
 using Factories.Interfaces;
 using GameSM.Interfaces;
 using GameSM.States;
+using Managers;
 using Providers.Assets;
 using Services.Configs;
 using Services.GameProgress;
@@ -19,21 +20,24 @@ namespace GameSM
         private Dictionary<Type, IExitableState> states;
         private IExitableState activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, ServiceLocator serviceLocator)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain,
+            ServiceLocator serviceLocator, TickableManager tickableManager)
         {
             this.serviceLocator = serviceLocator;
+            serviceLocator.RegisterService<ITickableManager>(tickableManager);
             states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, serviceLocator),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     serviceLocator.LocateService<IGameProgressService>(),
-                    serviceLocator.LocateService<ISaveLoadService>()), 
+                    serviceLocator.LocateService<ISaveLoadService>()),
                 [typeof(MainMenuState)] = new MainMenuState(this,
                     serviceLocator.LocateService<IGameProgressService>(),
                     serviceLocator.LocateService<IGameUIFactory>()),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain,
                     serviceLocator.LocateService<IGameUIFactory>(), serviceLocator.LocateService<IGamePrefabFactory>(),
-                    serviceLocator.LocateService<IGameProgressService>(), serviceLocator.LocateService<IConfigsService>()),
+                    serviceLocator.LocateService<IGameProgressService>(),
+                    serviceLocator.LocateService<IConfigsService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader, curtain, serviceLocator),
             };
         }

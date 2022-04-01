@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Factories;
 using Factories.Interfaces;
 using GameSM.Interfaces;
+using Managers;
 using Providers.Assets;
 using Services;
 using Services.Ads;
@@ -66,7 +67,7 @@ namespace GameSM.States
             serviceLocator.RegisterService<IGameStateMachine>(stateMachine);
             serviceLocator.RegisterService<CameraService>(new CameraService());
             serviceLocator.RegisterService<IPlayerGameObjectProvider>(new PlayerGameObjectProvider());
-            serviceLocator.RegisterService<IInputService>(InputService());
+            RegisterInputService();
             serviceLocator.RegisterService<IGameProgressService>(new GameProgressService());
             serviceLocator.RegisterService<IScreenService>(new ScreenService());
             //RegisterInAppService(new InAppProvider(), serviceLocator.LocateService<IGameProgressService>());
@@ -78,6 +79,13 @@ namespace GameSM.States
             serviceLocator.RegisterService<ISaveLoadService>(new SaveLoadService(
                 serviceLocator.LocateService<IGameProgressService>(),
                 serviceLocator.LocateService<IGamePrefabFactory>(), serviceLocator.LocateService<IGameUIFactory>()));
+        }
+
+        private void RegisterInputService()
+        {
+            var inputService = InputService();
+            serviceLocator.RegisterService<IInputService>(inputService);
+            serviceLocator.LocateService<ITickableManager>().AddTickable(inputService);
         }
 
         private void RegisterConfigsService()

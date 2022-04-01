@@ -22,5 +22,10 @@ namespace Services.GameInput
 
         protected static Vector2 SimpleInputAxis() =>
             new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
+
+        public virtual void Tick()
+        {
+            Debug.Log($"Tick in input service type: {GetType()}");
+        }
     }
 }

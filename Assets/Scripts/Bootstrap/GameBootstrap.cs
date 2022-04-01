@@ -1,7 +1,7 @@
 ﻿using GameSM.States;
+using Managers;
 using UI.Loading;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Bootstrap
 {
@@ -10,13 +10,14 @@ namespace Bootstrap
         //[SerializeField] private AssetReference loadingScreen;
         [SerializeField] private LoadingCurtain loadingScreenPrefab;
         private Game game;
+        private TickableManager tickableManager;
 
         private void Awake()
         {
-            //todo 
-            game = new Game(this, Instantiate(loadingScreenPrefab));
-            Game.GameStateMachine.Enter<BootstrapState>();
             DontDestroyOnLoad(this);
+            tickableManager = new GameObject("Tickable Manager").AddComponent<TickableManager>();
+            game = new Game(this, Instantiate(loadingScreenPrefab), tickableManager);
+            Game.GameStateMachine.Enter<BootstrapState>();
         }
     }
 }

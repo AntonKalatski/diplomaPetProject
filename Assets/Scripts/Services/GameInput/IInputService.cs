@@ -1,10 +1,11 @@
 using System;
+using Managers;
 using Services.GameServiceLocator;
 using UnityEngine;
 
 namespace Services
 {
-    public interface IInputService : IService
+    public interface IInputService : IService, ITickable
     {
         Vector2 Axis { get; }
         bool IsAttackButtonUp();
